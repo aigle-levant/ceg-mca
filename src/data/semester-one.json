@@ -1,0 +1,77 @@
+{
+  "semester": "I",
+  "courses": [
+    {
+      "code": "MA3111",
+      "title": "Mathematical Foundations of Computer Science",
+      "category": "FC",
+      "units": {
+        "I": "Statements - Connectives - Truth Tables - Normal Forms - Predicate Calculus – Inference - Theory for Statement Calculus.",
+        "II": "Permutations and Combinations - Mathematical Induction - Pigeonhole principle - Principle of Inclusion and Exclusion - Recurrence relations - Solution by generating functions and characteristics equations.",
+        "III": "Groups - Cyclic group - Permutation group (Sn and Dn) - Substructures - Homomorphism - Cosets and Lagrange’s Theorem - Normal Subgroups - Rings and Fields (definition and examples).",
+        "IV": "Partial order relation – Posets - Hasse diagram - Lattices - Special Lattices - Boolean Algebra.",
+        "V": "Finite state automata - Deterministic and non-deterministic model - languages accepted by Finite State Automata - Regular expressions - Context-free grammars - Derivation trees."
+      }
+    },
+    {
+      "code": "CA3101",
+      "title": "Data Structures",
+      "category": "PCC",
+      "units": {
+        "I": "Abstract Data Types (ADTs) – List ADT – Array-Based Implementation – Linked List Implementation – Doubly-Linked Lists – Circular Linked Lists – Stack ADT: Implementation of Stacks – Queue ADT: Implementation of Queues – Applications.",
+        "II": "Introduction, Terminology, Representation of Trees, Binary Trees, Properties of Binary Trees, Binary Tree Representations, Binary Tree Traversal (Inorder, Preorder, Postorder) – Expression Trees – Binary Search Tree ADT - Applications of Trees – some balanced tree mechanisms – AVL trees, 2-3 trees.",
+        "III": "The Graph Abstract Data Type, Introduction, Definition, Graph Representation, Elementary Graph Operation, Depth First Search, Breadth First Search, Connected Components, Spanning Trees, Biconnected Components, Minimum Cost Spanning Trees, Kruskal Algorithm, Prim’s Algorithm - All-Pairs Shortest Path, Transitive Closure.",
+        "IV": "Binary Heaps – Min Max Heaps – operations - Insertion Sort – Quick Sort – Heap Sort – Merge Sort – Linear Search – Binary Search.",
+        "V": "Hashing: The symbol table, Hashing Functions, Collision Resolution Techniques, File Structure: Concepts of fields, records and files, Sequential, Indexed and Relative/Random File Organization, Indexing structure for index files, hashing for direct files, Multi-Key file organization and access methods."
+      }
+    },
+    {
+      "code": "CA3102",
+      "title": "Database Technologies",
+      "category": "PCC",
+      "units": {
+        "I": "Purpose of Database System – Views of Data – Data Models – Database System Architecture – Introduction to Relational Databases – Relational Model – Keys – Relational Algebra – Relational Calculus – SQL Fundamentals – Advanced SQL features – Triggers – Embedded SQL.",
+        "II": "Entity-Relationship Model – EER Diagrams – Functional Dependencies – Non-Loss Decomposition Functional Dependencies – First Normal Form – Second Normal Form – Third Normal Form – Dependency Preservation – Boyce/Codd Normal Form – Multi-Valued Dependencies and Fourth Normal Form – Join Dependencies and Fifth Normal Form.",
+        "III": "Transaction Concepts – ACID Properties – Serializability – Transaction Isolation Levels – Concurrency Control – Need for Concurrency – Lock-Based Protocols - Timestamp-Based Protocols – Deadlock Handling – Recovery System – Failure Classification – Recovery Algorithm - ARIES.",
+        "IV": "Indexing and Hashing – Ordered Indices – B+ tree Index Files – Static Hashing – Dynamic Hashing – Query Processing Overview – Catalog Information for Cost Estimation – Query Optimization.",
+        "V": "Overview of Distributed Databases – Data Fragmentation – Replication – NOSQL Database: Characteristics – CAP theorem – Types of NoSQL Datastores: Column Oriented, Document, Key-Value and Graph Types – Introduction to MongoDB – Data Model - JSON and BSON - Basic Querying."
+      }
+    },
+    {
+      "code": "CA3103",
+      "title": "Java Programming",
+      "category": "PCC",
+      "units": {
+        "I": "Overview of Java – Java Fundamentals: Classes, Objects, Methods and Strings – Methods: A Deeper Look – Arrays and Array Lists – Classes and Objects: A Deeper Look – Inheritance – Polymorphism – Interfaces – Packages – Exception Handling.",
+        "II": "AWT & Swings – Strings, Characters and Regular Expressions – Files, Streams and Object Serialization – Generic collections – Generic Classes and Methods – Networking: Manipulating URLs – Reading web pages – Using stream sockets – Datagrams – Multicasting – Multicasting sockets.",
+        "III": "JSON – AJAX Enabled Rich Internet Applications with JSON – Java Mail API – SMTP, POP3 & IMAP.",
+        "IV": "Servlet – Servlet Architecture – Servlet lifecycle – Generic Servlet – HttpServlet – Server-Side Include – Overview of JSP – JSP Components – Bean – Session Tracking – Accessing Database with JDBC – Basics – Manipulating Databases with JDBC – Java Server Faces – Multitier Application Architecture – MVC Architecture of JSF Apps – Common JSF Components – Session Tracking.",
+        "V": "Advanced Frameworks – MVC framework – Hibernate – Using Annotations – Hibernate Query language – O/R mapping – Spring Framework – Case Studies."
+      }
+    },
+    {
+      "code": "CA3104",
+      "title": "Computer Networks and Management",
+      "category": "PCC",
+      "units": {
+        "I": "Data communication systems – Components and their functions - Building networks – Hosts and Networking devices – Switched Networks and Broadcast Networks – Transmission medium - Networking Devices: Hubs, Bridges, Switches, Routers, and Gateways - Edge, Access and Core networks – Role of software and hardware in networking – Layered Architecture – OSI and TCP/IP Reference Models.",
+        "II": "Wired and wireless media – Functions of physical layer – Modems – Transmission errors – Error detection and correction – Framing - Flow control – Sublayers of DLL – Broadcast networks – Collision Domain - Ethernet – CSMA/CD – Token Ring – VLAN – LAN Analyzer – IEEE 802.11 WLAN – CSMA/CA – Bluetooth – Ad hoc networks.",
+        "III": "Packet switching - Routing – Distance Vector and Link State Algorithms – RIP, OSPF and BGP - IPV4 Packet Format and Addressing – Effective IP address management techniques – Subnetting – CIDR – VLSM – DHCP – NAT – ICMP – Need for IPv6 – Addressing methods and types in IPv6 – IPv6 header – Advantages of IPv6 – Transition from IPv4 to IPv6.",
+        "IV": "Transport Layer functions – End to end semantics – Functions of transport layer - User Datagram Protocol – UDP Applications – Transmission Control Protocol – Connection establishment and release – Flow Control – Retransmission Strategies – Congestion Control – Application layer – Sockets – Protocols – HTTP – FTP Email Protocols – DNS.",
+        "V": "Network centric operations - Network monitoring – Open-source network monitoring tools – Network management model – Abstract Syntax Notation – Overview of MIB and SNMP – Wireshark tool – Network provisioning – Fault detection, location and isolation – Data plane and control plane management using SDN concepts."
+      }
+    },
+    {
+      "code": "CA3105",
+      "title": "Advanced Software Engineering",
+      "category": "PCC",
+      "units": {
+        "I": "Software Process Models: Agile Software Development, Lean Software Development, DevOps and Continuous Integration/Deployment, Incremental and Iterative Development, Formal Methods and Model-Driven Engineering.",
+        "II": "Elicitation and Analysis Techniques; Specification and Validation Methods, Use Case Modeling and Behavior Driven Development, Quality Attributes and Non-functional Requirements, Requirements Traceability and Management.",
+        "III": "Design by Contract and Design Constraints, Interface-based Design and Design Patterns, Aspect-Oriented Software Development (AOSD), Generative Programming and Domain-Specific Languages (DSLs), Advanced Object-Oriented Design Techniques.",
+        "IV": "Model-Based Testing - Model Checking, Mutation Testing - Fault Injection - Combinatorial Testing - Orthogonal Array Testing - Test Automation Frameworks - Testing AI/ML Systems and Autonomous Software. Quality Models and Standards (e.g., ISO/IEC 25010, CMMI), Continuous Integration, Delivery, and Deployment (CI/CD).",
+        "V": "Project Planning and Estimation - Agile Project Management - Risk Management - Secure Software Engineering - Configuration Management - Project Management for Emerging Systems."
+      }
+    }
+  ]
+}

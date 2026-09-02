@@ -1,0 +1,15 @@
+{
+  "CA_1": {
+    "period": "02.09.2026 - 28.10.2026",
+    "test_period": "13.10.2026 - 28.10.2026",
+    "last_date_for_mark_entry_in_SEMS": "06.11.2026"
+  },
+  "CA_2": {
+    "period": "29.10.2026 - 17.12.2026",
+    "test_period": "25.11.2026 - 07.12.2026",
+    "last_date_for_mark_entry_in_SEMS": "17.12.2026"
+  },
+  "end_semester": {
+    "commencement_of_examinations": "22.12.2026"
+  }
+}

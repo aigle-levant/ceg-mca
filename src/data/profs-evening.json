@@ -1,0 +1,72 @@
+{
+  "subjects": [
+    {
+      "code": "MA3111",
+      "name": "Mathematical Foundations of Computer Science",
+      "staff_incharge": "Mr. K. Murali Doss"
+    },
+    {
+      "code": "CA3101",
+      "name": "Data Structures",
+      "staff_incharge": "Dr. K. Arul Deepa"
+    },
+    {
+      "code": "CA3101 Lab",
+      "name": "Data Structures Laboratory",
+      "staff_incharge": "Dr. K. Arul Deepa (I/C), Ms. N. Anbarasi"
+    },
+    {
+      "code": "CA3102",
+      "name": "Database technologies",
+      "staff_incharge": "Dr. Khanna Nehemiah"
+    },
+    {
+      "code": "CA3102 Lab",
+      "name": "Database Technologies Laboratory",
+      "staff_incharge": "Dr. Khanna Nehemiah (I/C), Dr. P. Geetha"
+    },
+    {
+      "code": "CA3103",
+      "name": "Java Programming",
+      "staff_incharge": "Dr. D. Narasimhan"
+    },
+    {
+      "code": "CA3103 Lab",
+      "name": "Java Programming Lab",
+      "staff_incharge": "Dr. D. Narasimhan (I/C), Ms. N. Anbarasi"
+    },
+    {
+      "code": "CA3104",
+      "name": "Computer Networks and Management",
+      "staff_incharge": "Dr. N. Thangaraj"
+    },
+    {
+      "code": "CA3104 Lab",
+      "name": "Computer Networks and Management Lab",
+      "staff_incharge": "Dr. N. Thangaraj (I/C), Dr. G. Geetha"
+    },
+    {
+      "code": "CA3105",
+      "name": "Advanced Software Engineering",
+      "staff_incharge": "Ms. N. Anbarasi"
+    },
+    {
+      "code": "BX3001",
+      "name": "Fundamentals of Data Structures",
+      "type": "Bridge Course",
+      "staff_incharge": "Dr. K. Arul Deepa"
+    },
+    {
+      "code": "BX3002",
+      "name": "Problem Solving and Programming in C",
+      "type": "Bridge Course",
+      "staff_incharge": "Dr. G. Geetha"
+    },
+    {
+      "code": "BX3003",
+      "name": "Database Management Systems",
+      "type": "Bridge Course",
+      "staff_incharge": "Dr. Khanna Nehemiah"
+    }
+  ]
+}

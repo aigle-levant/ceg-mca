@@ -1,0 +1,167 @@
+{
+  "Monday": [
+    {
+      "time": "9:25 AM - 10:15 AM",
+      "subject_code": "CA3102"
+    },
+    {
+      "time": "11:25 AM - 12:15 PM",
+      "subject_code": "CA3103"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "CA3102"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "CA3102 Lab"
+    },
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "CA3102 Lab"
+    },
+    {
+      "time": "8:25 PM - 9:15 PM",
+      "subject_code": "BX3001 Lab"
+    }
+  ],
+
+  "Tuesday": [
+    {
+      "time": "8:30 AM - 9:20 AM",
+      "subject_code": "CA3101"
+    },
+    {
+      "time": "10:30 AM - 11:20 AM",
+      "subject_code": "MA3111"
+    },
+    {
+      "time": "11:25 AM - 12:15 PM",
+      "subject_code": "MA3111"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "CA3104 Lab"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "CA3104 Lab"
+    },
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "CA3104"
+    }
+  ],
+
+  "Wednesday": [
+    {
+      "time": "8:30 AM - 9:20 AM",
+      "subject_code": "BX3002"
+    },
+    {
+      "time": "9:25 AM - 10:15 AM",
+      "subject_code": "CA3103"
+    },
+    {
+      "time": "10:30 AM - 11:20 AM",
+      "subject_code": "CA3105"
+    },
+    {
+      "time": "11:25 AM - 12:15 PM",
+      "subject_code": "CA3105"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "MA3111"
+    },
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "MA3111"
+    },
+    {
+      "time": "6:35 PM - 7:25 PM",
+      "subject_code": "BX3002"
+    },
+    {
+      "time": "7:30 PM - 8:20 PM",
+      "subject_code": "BX3002 Lab"
+    },
+    {
+      "time": "8:25 PM - 9:15 PM",
+      "subject_code": "BX3002 Lab"
+    }
+  ],
+
+  "Thursday": [
+    {
+      "time": "8:30 AM - 9:20 AM",
+      "subject_code": "BX3002"
+    },
+    {
+      "time": "9:25 AM - 10:15 AM",
+      "subject_code": "CA3101 Lab"
+    },
+    {
+      "time": "10:30 AM - 11:20 AM",
+      "subject_code": "CA3101 Lab"
+    },
+    {
+      "time": "11:25 AM - 12:15 PM",
+      "subject_code": "CA3101 Lab"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "CA3101"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "CA3105"
+    },
+    {
+      "time": "8:25 PM - 9:15 PM",
+      "subject_code": "BX3003"
+    }
+  ],
+
+  "Friday": [
+    {
+      "time": "9:25 AM - 10:15 AM",
+      "subject_code": "BX3001"
+    },
+    {
+      "time": "10:30 AM - 11:20 AM",
+      "subject_code": "CA3104"
+    },
+    {
+      "time": "11:25 AM - 12:15 PM",
+      "subject_code": "CA3104"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "CA3103 Lab"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "CA3103 Lab"
+    },
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "BX3003"
+    },
+    {
+      "time": "7:30 PM - 8:20 PM",
+      "subject_code": "BX3003 Lab"
+    },
+    {
+      "time": "8:25 PM - 9:15 PM",
+      "subject_code": "BX3003 Lab"
+    }
+  ],
+
+  "Saturday": [
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "BX3003"
+    }
+  ]
+}

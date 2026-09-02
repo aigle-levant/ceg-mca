@@ -1,0 +1,69 @@
+{
+  "subjects": [
+    {
+      "code": "MA3111",
+      "name": "Mathematical Foundations of Computer Science",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3101",
+      "name": "Data Structures",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3101 Lab",
+      "name": "Data Structures Laboratory",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3102",
+      "name": "Database technologies",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3102 Lab",
+      "name": "Database Technologies Laboratory",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3103",
+      "name": "Java Programming",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3103 Lab",
+      "name": "Java Programming Lab",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3104",
+      "name": "Computer Networks and Management",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3104 Lab",
+      "name": "Computer Networks and Management Lab",
+      "type": "Regular Course"
+    },
+    {
+      "code": "CA3105",
+      "name": "Advanced Software Engineering",
+      "type": "Regular Course"
+    },
+    {
+      "code": "BX3001",
+      "name": "Fundamentals of Data Structures",
+      "type": "Bridge Course"
+    },
+    {
+      "code": "BX3002",
+      "name": "Problem Solving and Programming in C",
+      "type": "Bridge Course"
+    },
+    {
+      "code": "BX3003",
+      "name": "Database Management Systems",
+      "type": "Bridge Course"
+    }
+  ]
+}
