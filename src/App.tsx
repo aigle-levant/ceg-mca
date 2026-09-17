@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import type { BatchMode, Timetable } from "@/types/schedule";
 import { useSchedule } from "@/hooks/useSchedule";
-import { useNavigation, type PageId } from "@/hooks/useNavigation";
+import { useNavigation } from "@/hooks/useNavigation";
 import { saveTimetable } from "@/lib/api";
 import { CurrentClassCard } from "@/components/CurrentClassCard";
 import { TimetableView } from "@/components/TimetableView";

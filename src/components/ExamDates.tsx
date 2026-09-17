@@ -63,10 +63,6 @@ function daysUntil(target: Date, now: Date): number {
   return Math.ceil(diff / (1000 * 60 * 60 * 24));
 }
 
-function daysBetween(start: Date, end: Date): number {
-  return Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-}
-
 // ─── Status badge ───────────────────────────────────────────────────
 
 function StatusBadge({ status }: { status: DateStatus }) {

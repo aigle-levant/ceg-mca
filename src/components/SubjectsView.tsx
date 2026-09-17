@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, BookOpen, FlaskConical, Layers } from "lucide-react";
+import { ChevronDown, BookOpen, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 import subjectsData from "@/data/subjects.json";
 import semesterData from "@/data/semester-one.json";
@@ -32,10 +32,6 @@ const unitLabels = ["I", "II", "III", "IV", "V"];
 export function SubjectsView() {
   const courses = semesterData.courses as SemesterCourse[];
 
-  // Separate regular subjects from bridge courses
-  const regularSubjects = subjectsData.subjects.filter(
-    (s) => s.type === "Regular Course" && !s.code.includes("Lab")
-  );
   const bridgeSubjects = subjectsData.subjects.filter(
     (s) => s.type === "Bridge Course"
   );
