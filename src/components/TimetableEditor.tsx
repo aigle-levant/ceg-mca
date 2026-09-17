@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Plus, Trash2, Save, X, Clock } from "lucide-react";
+import { Plus, Trash2, Save, X, Clock, AlertCircle } from "lucide-react";
 import type { BatchMode, Timetable, TimetableEntry } from "@/types/schedule";
 import { cn } from "@/lib/utils";
 
