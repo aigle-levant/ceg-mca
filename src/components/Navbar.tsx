@@ -1,89 +1,133 @@
-import { CalendarDays, Clock3, GraduationCap, Menu, BookOpen } from "lucide-react";
-import { Button } from "./button";
-import { Sheet, SheetContent, SheetTrigger } from "./sheet";
+import {
+  CalendarDays,
+  CalendarCheck,
+  GraduationCap,
+  Users,
+  Zap,
+  BookOpen,
+} from "lucide-react";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import type { PageId } from "@/hooks/useNavigation";
+import { cn } from "@/lib/utils";
 
-const navItems = [
-  {
-    label: "Class",
-    href: "#class",
-    icon: GraduationCap,
-  },
-  {
-    label: "Syllabus",
-    href: "#syllabus",
-    icon: BookOpen,
-  },
-  {
-    label: "Time Table",
-    href: "#timetable",
-    icon: Clock3,
-  },
-  {
-    label: "Important Dates",
-    href: "#important-dates",
-    icon: CalendarDays,
-  },
+interface NavbarProps {
+  currentPage: PageId;
+  onNavigate: (page: PageId) => void;
+}
+
+const navItems: { id: PageId; label: string; href: string; icon: typeof Zap }[] = [
+  { id: "dashboard", label: "Dashboard", href: "#/", icon: Zap },
+  { id: "timetable", label: "Timetable", href: "#/timetable", icon: CalendarDays },
+  { id: "exams", label: "Exams", href: "#/exams", icon: CalendarCheck },
+  { id: "subjects", label: "Subjects", href: "#/subjects", icon: BookOpen },
+  { id: "staff", label: "Staff", href: "#/staff", icon: Users },
 ];
 
-export function Navbar() {
+export function Navbar({ currentPage, onNavigate }: NavbarProps) {
   return (
-    <header className="sticky top-4 z-50 px-4">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-full border bg-background/80 px-4 py-2 shadow-sm backdrop-blur-md">
-        {/* Logo */}
-        <a
-          href="#"
-          className="flex items-center gap-2 rounded-full px-3 py-2 font-semibold"
-        >
-          <div className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <GraduationCap className="size-4" />
-          </div>
+    <>
+      {/* ── Top Header Bar ── */}
+      <header className="sticky top-3 z-40 px-3 sm:px-4">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between gap-2 rounded-full border border-border/80 bg-background/85 px-3 py-2 shadow-xs backdrop-blur-md sm:px-4">
+          {/* Logo */}
+          <button
+            type="button"
+            onClick={() => onNavigate("dashboard")}
+            className="flex items-center gap-2 rounded-full px-1.5 py-1 font-semibold group transition-colors text-left"
+          >
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xs transition-transform group-hover:scale-105">
+              <GraduationCap className="size-4" />
+            </div>
 
-          <span className="hidden sm:inline">Class Dashboard</span>
-        </a>
+            <div className="flex flex-col leading-none">
+              <span className="text-sm font-bold tracking-tight text-foreground">
+                CEG MCA
+              </span>
+              <span className="hidden text-[10px] font-medium text-primary/80 sm:inline">
+                Anna University
+              </span>
+            </div>
+          </button>
 
-        {/* Desktop navigation */}
-        <div className="hidden items-center gap-1 md:flex">
-          {navItems.map(({ label, href, icon: Icon }) => (
-            <a
-              key={label}
-              href={href}
-              className="flex items-center gap-2 rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            >
-              <Icon className="size-4" />
-              {label}
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile navigation */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-full md:hidden"
-              aria-label="Open navigation"
-            >
-              <Menu className="size-5" />
-            </Button>
-          </SheetTrigger>
-
-          <SheetContent side="right" className="w-[280px]">
-            <div className="mt-8 flex flex-col gap-2">
-              {navItems.map(({ label, href, icon: Icon }) => (
+          {/* Desktop navigation */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navItems.map(({ id, label, href, icon: Icon }) => {
+              const isActive = currentPage === id;
+              return (
                 <a
-                  key={label}
+                  key={id}
                   href={href}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(id);
+                  }}
+                  className={cn(
+                    "flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm transition-all duration-200",
+                    isActive
+                      ? "bg-primary text-primary-foreground font-semibold shadow-xs"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
                 >
-                  <Icon className="size-5 text-muted-foreground" />
+                  <Icon className="size-4" />
                   {label}
                 </a>
-              ))}
+              );
+            })}
+          </div>
+
+          {/* Theme Switcher: standard on desktop, compact on mobile */}
+          <div className="flex items-center">
+            <div className="hidden md:block">
+              <ThemeSwitcher />
             </div>
-          </SheetContent>
-        </Sheet>
+            <div className="md:hidden">
+              <ThemeSwitcher compact />
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* ── Mobile Bottom Navigation Bar ── */}
+      <nav
+        aria-label="Mobile Navigation"
+        className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border/80 bg-background/95 backdrop-blur-lg px-1 pt-1.5 pb-2 shadow-lg"
+      >
+        <div className="flex items-center justify-around max-w-md mx-auto">
+          {navItems.map(({ id, label, href, icon: Icon }) => {
+            const isActive = currentPage === id;
+            return (
+              <a
+                key={id}
+                href={href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(id);
+                }}
+                className={cn(
+                  "flex flex-1 flex-col items-center gap-1 py-1 px-1 rounded-xl transition-all duration-200",
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex size-7 items-center justify-center rounded-full transition-all duration-200",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-xs scale-110"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  <Icon className="size-3.5" />
+                </div>
+                <span className="text-[10px] leading-none tracking-tight">
+                  {label}
+                </span>
+              </a>
+            );
+          })}
+        </div>
       </nav>
-    </header>
+    </>
   );
 }

@@ -1,108 +1,100 @@
 import { ArrowUpRight, GraduationCap } from "lucide-react";
+import type { PageId } from "@/hooks/useNavigation";
 
-const navigation = [
-  { label: "Class", href: "#class" },
-  { label: "Syllabus", href: "#syllabus" },
-  { label: "Time Table", href: "#timetable" },
-  { label: "Important Dates", href: "#important-dates" },
+const navigation: { id: PageId; label: string; href: string }[] = [
+  { id: "dashboard", label: "Dashboard", href: "#/" },
+  { id: "timetable", label: "Timetable", href: "#/timetable" },
+  { id: "exams", label: "Exams", href: "#/exams" },
+  { id: "subjects", label: "Subjects", href: "#/subjects" },
+  { id: "staff", label: "Staff", href: "#/staff" },
 ];
 
-const resources = [
-  "Upcoming Exams",
-  "Upcoming Holidays",
-  "Regular Timetable",
-  "SS Timetable",
-];
+interface FooterProps {
+  onNavigate?: (page: PageId) => void;
+}
 
-export function Footer() {
+export function Footer({ onNavigate }: FooterProps) {
   return (
-    <footer className="bg-[#223843] text-[#EFF1F3]">
-      <div className="mx-auto max-w-[1600px] px-6 py-20 md:px-12 lg:px-16 lg:py-28">
+    <footer className="border-t border-border/80 bg-[#150F12] text-[#F7F1EB]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24 pb-24 md:pb-24">
         {/* Hero */}
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#D8B4A0]">
-              Everything your class needs.
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-400/80">
+              Department of Computer Science & Engineering
             </p>
 
-            <h2 className="mt-6 max-w-5xl text-[clamp(3.5rem,8vw,8.5rem)] font-medium leading-[0.84] tracking-[-0.065em]">
-              Less confusion.
+            <h2 className="mt-6 max-w-3xl text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.88] tracking-[-0.05em] text-[#FFFDF9]">
+              Heritage.
               <br />
-              More learning.
+              Excellence.
             </h2>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="my-20 h-px bg-white/10" />
+        <div className="my-14 h-px bg-white/10" />
 
         {/* Content */}
-        <div className="grid gap-14 lg:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[2fr_1fr]">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-full bg-[#D77A61]">
-                <GraduationCap className="size-5 text-[#EFF1F3]" />
+              <div className="flex size-10 items-center justify-center rounded-full bg-primary/20 ring-1 ring-primary/40">
+                <GraduationCap className="size-5 text-primary" />
               </div>
 
-              <h3 className="text-3xl font-semibold tracking-[-0.05em]">
-                Class<span className="text-[#D77A61]">.</span>
+              <h3 className="text-2xl font-bold tracking-tight text-[#FFFDF9]">
+                CEG MCA<span className="text-amber-400">.</span>
               </h3>
             </div>
 
-            <p className="mt-6 max-w-md text-base leading-8 text-[#EFF1F3]/70">
-              A simple place for your class to keep track of timetables,
-              syllabus, exams, holidays, and everything important.
+            <p className="mt-5 max-w-md text-sm leading-7 text-[#F7F1EB]/60">
+              A crafted dashboard for Anna University MCA students to effortlessly
+              track timetables, ongoing lectures, examinations, and faculty details.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D8B4A0]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/80">
               Navigate
             </p>
 
-            <div className="mt-6 flex flex-col gap-4">
+            <div className="mt-5 flex flex-col gap-3.5">
               {navigation.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="transition-colors hover:text-[#D77A61]"
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate(item.id);
+                    }
+                  }}
+                  className="text-sm text-[#F7F1EB]/70 transition-colors hover:text-amber-400"
                 >
                   {item.label}
                 </a>
               ))}
             </div>
           </div>
-
-          {/* Resources */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D8B4A0]">
-              At a glance
-            </p>
-
-            <div className="mt-6 flex flex-col gap-4 text-[#EFF1F3]/70">
-              {resources.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Bottom */}
-        <div className="mt-20 flex flex-col gap-5 border-t border-white/10 pt-8 text-sm text-[#EFF1F3]/55 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Class Dashboard.</p>
+        <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-8 text-xs text-[#F7F1EB]/40 md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} College of Engineering Guindy • MCA Class.</p>
 
-          <p>Made for our class.</p>
+          <p className="text-amber-400/60">Crafted with Indian Heritage Elegance.</p>
 
           <a
-            href="https://github.com/aigle-levant/voicekart-ai"
+            href="https://github.com/aigle-levant/ceg-mca"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 transition-colors hover:text-[#D77A61]"
+            className="inline-flex items-center gap-1.5 transition-colors hover:text-amber-400"
           >
-            Built by us
-            <ArrowUpRight size={14} />
+            Source Code
+            <ArrowUpRight size={12} />
           </a>
         </div>
       </div>

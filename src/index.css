@@ -1,13 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Inter Variable', sans-serif;
+    --font-heading: 'Roboto Condensed', sans-serif;
+    --font-sans: 'Roboto', sans-serif;
+    --font-condensed: 'Roboto Condensed', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,85 +46,168 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* Heritage Indian Luxury Palette (Incredible India, Genda Phools, Lotus House, CEG) */
+    --color-heritage-crimson: var(--heritage-crimson);
+    --color-heritage-marigold: var(--heritage-marigold);
+    --color-heritage-sandalwood: var(--heritage-sandalwood);
+    --color-heritage-pistachio: var(--heritage-pistachio);
+    --color-heritage-lotus: var(--heritage-lotus);
+    --color-heritage-gold: var(--heritage-gold);
 }
 
+/* ==========================================================================
+   Indian Heritage & Luxury Aesthetic Palette
+   References:
+   1. Incredible India: Royal Saffron Amber, Crimson Terracotta, Ivory Parchment
+   2. Genda Phools: Sandalwood tones, Marigold ochre, Teak wood umber
+   3. Lotus House: Rich Kheer Cream, Rose Petal Red, Pistachio, Royal Velvet Dark
+   ========================================================================== */
+
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    /* Sandalwood & Kheer Ivory Canvas */
+    --background: oklch(0.982 0.012 75);
+    --foreground: oklch(0.20 0.025 35);
+
+    /* Crisp Sandalwood Silk Cards */
+    --card: oklch(0.998 0.005 75);
+    --card-foreground: oklch(0.20 0.025 35);
+
+    --popover: oklch(0.998 0.005 75);
+    --popover-foreground: oklch(0.20 0.025 35);
+
+    /* Royal Heritage Terracotta Crimson (Kumkum / CEG Red) */
+    --primary: oklch(0.48 0.185 27);
+    --primary-foreground: oklch(0.99 0.005 75);
+
+    /* Sandalwood Buff & Teak Accents */
+    --secondary: oklch(0.94 0.022 65);
+    --secondary-foreground: oklch(0.33 0.13 27);
+
+    /* Warm Muted Surfaces */
+    --muted: oklch(0.945 0.015 65);
+    --muted-foreground: oklch(0.48 0.025 45);
+
+    /* Marigold (Genda Phool) Saffron Accent */
+    --accent: oklch(0.945 0.035 72);
+    --accent-foreground: oklch(0.44 0.15 58);
+
+    --destructive: oklch(0.55 0.22 27);
+    
+    /* Antique Brass & Limestone Mortar Seams */
+    --border: oklch(0.885 0.018 68);
+    --input: oklch(0.885 0.018 68);
+    --ring: oklch(0.48 0.185 27);
+
+    /* Heritage Palette Accents */
+    --chart-1: oklch(0.48 0.185 27);  /* Royal Crimson */
+    --chart-2: oklch(0.69 0.185 65);  /* Marigold Saffron */
+    --chart-3: oklch(0.58 0.15 138);  /* Pistachio / Lawn Leaf */
+    --chart-4: oklch(0.68 0.16 355);  /* Lotus Blossom Rose */
+    --chart-5: oklch(0.76 0.14 80);   /* Sandalwood Gold */
+
+    --radius: 0.75rem;
+
+    --sidebar: oklch(0.975 0.012 70);
+    --sidebar-foreground: oklch(0.20 0.025 35);
+    --sidebar-primary: oklch(0.48 0.185 27);
+    --sidebar-primary-foreground: oklch(0.99 0.005 75);
+    --sidebar-accent: oklch(0.94 0.022 65);
+    --sidebar-accent-foreground: oklch(0.33 0.13 27);
+    --sidebar-border: oklch(0.885 0.018 68);
+    --sidebar-ring: oklch(0.48 0.185 27);
+
+    /* Explicit Indian Heritage tokens */
+    --heritage-crimson: oklch(0.48 0.185 27);
+    --heritage-marigold: oklch(0.69 0.185 65);
+    --heritage-sandalwood: oklch(0.92 0.025 72);
+    --heritage-pistachio: oklch(0.58 0.15 138);
+    --heritage-lotus: oklch(0.68 0.16 355);
+    --heritage-gold: oklch(0.76 0.14 80);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    /* Royal Velvet & Midnight Rosewood Canvas */
+    --background: oklch(0.135 0.018 20);
+    --foreground: oklch(0.96 0.012 70);
+
+    /* Deep Teakwood & Velvet Night Cards */
+    --card: oklch(0.185 0.022 22);
+    --card-foreground: oklch(0.96 0.012 70);
+
+    --popover: oklch(0.185 0.022 22);
+    --popover-foreground: oklch(0.96 0.012 70);
+
+    /* Glowing Royal Terracotta Crimson */
+    --primary: oklch(0.63 0.21 26);
+    --primary-foreground: oklch(0.99 0 0);
+
+    /* Midnight Rosewood Accents */
+    --secondary: oklch(0.23 0.026 22);
+    --secondary-foreground: oklch(0.92 0.02 70);
+
+    /* Muted Night Teak */
+    --muted: oklch(0.22 0.018 22);
+    --muted-foreground: oklch(0.67 0.02 55);
+
+    /* Radiant Saffron Night Ember */
+    --accent: oklch(0.26 0.045 60);
+    --accent-foreground: oklch(0.85 0.14 70);
+
+    --destructive: oklch(0.65 0.20 25);
+
+    /* Antiqued Night Bronze Seam */
+    --border: oklch(0.28 0.022 22);
+    --input: oklch(0.28 0.022 22);
+    --ring: oklch(0.63 0.21 26);
+
+    /* Dark Accents */
+    --chart-1: oklch(0.63 0.21 26);  /* Glowing Crimson */
+    --chart-2: oklch(0.78 0.17 68);  /* Radiant Marigold */
+    --chart-3: oklch(0.68 0.16 138); /* Fresh Pistachio */
+    --chart-4: oklch(0.76 0.14 355); /* Lotus Blossom */
+    --chart-5: oklch(0.82 0.14 80);  /* Antique Gold */
+
+    --sidebar: oklch(0.16 0.018 20);
+    --sidebar-foreground: oklch(0.96 0.012 70);
+    --sidebar-primary: oklch(0.63 0.21 26);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.23 0.026 22);
+    --sidebar-accent-foreground: oklch(0.92 0.02 70);
+    --sidebar-border: oklch(0.28 0.022 22);
+    --sidebar-ring: oklch(0.63 0.21 26);
+
+    /* Explicit Indian Heritage tokens in dark mode */
+    --heritage-crimson: oklch(0.63 0.21 26);
+    --heritage-marigold: oklch(0.78 0.17 68);
+    --heritage-sandalwood: oklch(0.32 0.025 72);
+    --heritage-pistachio: oklch(0.68 0.16 138);
+    --heritage-lotus: oklch(0.76 0.14 355);
+    --heritage-gold: oklch(0.82 0.14 80);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
-    @apply bg-background text-foreground;
-    }
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
   html {
-    @apply font-sans;
-    }
+    @apply font-sans scroll-smooth;
+  }
+}
+
+/* Hide scrollbar on tab bars */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
