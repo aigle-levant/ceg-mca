@@ -1,11 +1,19 @@
 {
   "Monday": [
     {
+      "time": "8:30 AM - 9:20 AM",
+      "subject_code": "CA3102"
+    },
+    {
       "time": "9:25 AM - 10:15 AM",
       "subject_code": "CA3102"
     },
     {
-      "time": "11:25 AM - 12:15 PM",
+      "time": "10:30 AM - 11:20 AM",
+      "subject_code": "CA3103"
+    },
+    {
+      "time": "11:25 AM - 12:10 PM",
       "subject_code": "CA3103"
     },
     {
@@ -21,8 +29,8 @@
       "subject_code": "CA3102 Lab"
     },
     {
-      "time": "8:25 PM - 9:15 PM",
-      "subject_code": "BX3001 Lab"
+      "time": "3:55 PM - 4:45 PM",
+      "subject_code": "CA3102 Lab"
     }
   ],
   "Tuesday": [
@@ -31,11 +39,15 @@
       "subject_code": "CA3101"
     },
     {
+      "time": "9:25 AM - 10:15 AM",
+      "subject_code": "CA3101"
+    },
+    {
       "time": "10:30 AM - 11:20 AM",
       "subject_code": "MA3111"
     },
     {
-      "time": "11:25 AM - 12:15 PM",
+      "time": "11:25 AM - 12:10 PM",
       "subject_code": "MA3111"
     },
     {
@@ -54,45 +66,45 @@
   "Wednesday": [
     {
       "time": "8:30 AM - 9:20 AM",
-      "subject_code": "BX3002"
+      "subject_code": "CA3103"
     },
     {
       "time": "9:25 AM - 10:15 AM",
-      "subject_code": "CA3103"
+      "subject_code": "CA3101"
     },
     {
       "time": "10:30 AM - 11:20 AM",
       "subject_code": "CA3105"
     },
     {
-      "time": "11:25 AM - 12:15 PM",
+      "time": "11:25 AM - 12:10 PM",
       "subject_code": "CA3105"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "MA3111"
     },
     {
       "time": "2:05 PM - 2:55 PM",
       "subject_code": "MA3111"
     },
     {
-      "time": "3:00 PM - 3:50 PM",
-      "subject_code": "MA3111"
-    },
-    {
-      "time": "6:35 PM - 7:25 PM",
-      "subject_code": "BX3002"
+      "time": "4:45 PM - 5:35 PM",
+      "subject_code": "BX3003"
     },
     {
       "time": "7:30 PM - 8:20 PM",
-      "subject_code": "BX3002 Lab"
+      "subject_code": "BX3001 Lab"
     },
     {
       "time": "8:25 PM - 9:15 PM",
-      "subject_code": "BX3002 Lab"
+      "subject_code": "BX3001 Lab"
     }
   ],
   "Thursday": [
     {
       "time": "8:30 AM - 9:20 AM",
-      "subject_code": "BX3002"
+      "subject_code": "CA3101 Lab"
     },
     {
       "time": "9:25 AM - 10:15 AM",
@@ -103,34 +115,42 @@
       "subject_code": "CA3101 Lab"
     },
     {
-      "time": "11:25 AM - 12:15 PM",
-      "subject_code": "CA3101 Lab"
+      "time": "11:25 AM - 12:10 PM",
+      "subject_code": "BX3002"
     },
     {
       "time": "1:10 PM - 2:00 PM",
-      "subject_code": "CA3101"
-    },
-    {
-      "time": "2:05 PM - 2:55 PM",
       "subject_code": "CA3105"
     },
     {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "BX3001"
+    },
+    {
+      "time": "7:30 PM - 8:20 PM",
+      "subject_code": "BX3002"
+    },
+    {
       "time": "8:25 PM - 9:15 PM",
-      "subject_code": "BX3003"
+      "subject_code": "BX3002"
     }
   ],
   "Friday": [
     {
+      "time": "8:30 AM - 9:20 AM",
+      "subject_code": "CA3104"
+    },
+    {
       "time": "9:25 AM - 10:15 AM",
-      "subject_code": "BX3001"
+      "subject_code": "CA3104"
     },
     {
       "time": "10:30 AM - 11:20 AM",
-      "subject_code": "CA3104"
+      "subject_code": "BX3002 Lab"
     },
     {
-      "time": "11:25 AM - 12:15 PM",
-      "subject_code": "CA3104"
+      "time": "11:25 AM - 12:10 PM",
+      "subject_code": "BX3002 Lab"
     },
     {
       "time": "1:10 PM - 2:00 PM",
@@ -142,21 +162,33 @@
     },
     {
       "time": "3:00 PM - 3:50 PM",
-      "subject_code": "BX3003"
+      "subject_code": "BX3001"
     },
     {
-      "time": "7:30 PM - 8:20 PM",
-      "subject_code": "BX3003 Lab"
-    },
-    {
-      "time": "8:25 PM - 9:15 PM",
-      "subject_code": "BX3003 Lab"
+      "time": "3:55 PM - 4:45 PM",
+      "subject_code": "BX3001"
     }
   ],
   "Saturday": [
     {
-      "time": "3:00 PM - 3:50 PM",
+      "time": "11:25 AM - 12:15 PM",
       "subject_code": "BX3003"
+    },
+    {
+      "time": "1:10 PM - 2:00 PM",
+      "subject_code": "BX3003"
+    },
+    {
+      "time": "2:05 PM - 2:55 PM",
+      "subject_code": "BX3003"
+    },
+    {
+      "time": "3:00 PM - 3:50 PM",
+      "subject_code": "BX3003 Lab"
+    },
+    {
+      "time": "3:55 PM - 4:45 PM",
+      "subject_code": "BX3003 Lab"
     }
   ]
 }
