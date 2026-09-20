@@ -1,7 +1,6 @@
 import {
   CalendarDays,
   CalendarCheck,
-  GraduationCap,
   Users,
   Zap,
   BookOpen,
