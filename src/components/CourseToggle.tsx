@@ -22,7 +22,7 @@ export function CourseToggle({ mode, onModeChange }: CourseToggleProps) {
         type="button"
         onClick={() => onModeChange("non-bridge")}
         className={cn(
-          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200",
+          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200 active:scale-95 touch-manipulation",
           mode === "non-bridge"
             ? "text-foreground font-semibold"
             : "text-muted-foreground hover:text-foreground/80"
@@ -41,7 +41,7 @@ export function CourseToggle({ mode, onModeChange }: CourseToggleProps) {
         type="button"
         onClick={() => onModeChange("bridge")}
         className={cn(
-          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200",
+          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200 active:scale-95 touch-manipulation",
           mode === "bridge"
             ? "text-foreground font-semibold"
             : "text-muted-foreground hover:text-foreground/80"

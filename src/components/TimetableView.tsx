@@ -33,29 +33,31 @@ export function TimetableView({
   return (
     <div>
       {/* Day tabs */}
-      <div className="mb-6 flex gap-1.5 overflow-x-auto rounded-2xl border border-border bg-card p-1.5 scrollbar-none">
-        {WEEKDAYS.map((day) => {
-          const isActive = day === selectedDay;
-          const isCurrent = day === currentDay;
-          return (
-            <button
-              key={day}
-              onClick={() => setSelectedDay(day)}
-              className={cn(
-                "relative flex-shrink-0 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-xs font-semibold"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <span className="hidden sm:inline">{day}</span>
-              <span className="sm:hidden">{day.slice(0, 3)}</span>
-              {isCurrent && !isActive && (
-                <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
-              )}
-            </button>
-          );
-        })}
+      <div className="mb-5 sm:mb-6 -mx-3 px-3 sm:mx-0 sm:px-0 flex gap-1.5 overflow-x-auto scrollbar-none touch-pan-x">
+        <div className="flex w-full min-w-max sm:w-auto gap-1 sm:gap-1.5 rounded-2xl border border-border bg-card p-1 sm:p-1.5">
+          {WEEKDAYS.map((day) => {
+            const isActive = day === selectedDay;
+            const isCurrent = day === currentDay;
+            return (
+              <button
+                key={day}
+                onClick={() => setSelectedDay(day)}
+                className={cn(
+                  "relative flex-1 sm:flex-initial rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all duration-200 min-h-[40px] sm:min-h-[44px] flex items-center justify-center active:scale-95 touch-manipulation",
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                )}
+              >
+                <span className="hidden sm:inline">{day}</span>
+                <span className="sm:hidden font-semibold">{day.slice(0, 3)}</span>
+                {isCurrent && !isActive && (
+                  <span className="absolute top-1.5 right-1.5 size-1.5 sm:size-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Schedule list */}

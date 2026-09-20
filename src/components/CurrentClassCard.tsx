@@ -25,7 +25,7 @@ export function CurrentClassCard({
       {/* ── Current class ── */}
       <div
         className={cn(
-          "group relative overflow-hidden rounded-2xl sm:rounded-3xl border p-5 sm:p-7 md:p-9 shadow-xs transition-all duration-500 bg-card",
+          "group relative overflow-hidden rounded-2xl sm:rounded-3xl border p-4 sm:p-7 md:p-9 shadow-xs transition-all duration-500 bg-card",
           currentClass
             ? "border-emerald-500/30"
             : "border-border/80"
@@ -38,11 +38,11 @@ export function CurrentClassCard({
           </div>
 
           {currentClass ? (
-            <div className="mt-4 sm:mt-6">
+            <div className="mt-3.5 sm:mt-6">
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground line-clamp-2">
+                    <h2 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground line-clamp-2">
                       {currentClass.subjectName}
                     </h2>
                   </div>
@@ -114,7 +114,7 @@ export function CurrentClassCard({
       </div>
 
       {/* ── Upcoming class ── */}
-      <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-5 sm:p-7 md:p-9 shadow-xs transition-all duration-500">
+      <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-7 md:p-9 shadow-xs transition-all duration-500">
         <div className="relative">
           <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-muted-foreground">
             <ArrowRight className="size-4 text-amber-600 dark:text-amber-400" />
@@ -122,9 +122,9 @@ export function CurrentClassCard({
           </div>
 
           {upcomingClass ? (
-            <div className="mt-4 sm:mt-6">
+            <div className="mt-3.5 sm:mt-6">
               <div className="flex items-center gap-2">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground line-clamp-2">
+                <h2 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground line-clamp-2">
                   {upcomingClass.subjectName}
                 </h2>
               </div>

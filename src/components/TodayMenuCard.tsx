@@ -183,32 +183,45 @@ export function TodayMenuCard({ onNavigateMess }: TodayMenuCardProps) {
   return (
     <div className="rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-xs">
       {/* ── Card Header ── */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-              <UtensilsCrossed className="size-4" />
+      <div className="flex flex-col gap-3.5 sm:flex-row sm:items-center sm:justify-between border-b border-border/60 pb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                <UtensilsCrossed className="size-4" />
+              </div>
+              <h2 className="text-base sm:text-xl font-bold tracking-tight text-foreground">
+                Today's Menu
+              </h2>
+              <span className="rounded-full bg-primary/10 border border-primary/20 px-2 py-0.5 text-[11px] font-bold text-primary">
+                {today}
+              </span>
             </div>
-            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
-              Today's Menu
-            </h2>
-            <span className="rounded-full bg-primary/10 border border-primary/20 px-2 py-0.5 text-[11px] font-bold text-primary">
-              {today}
-            </span>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Hostel meals served across all 4 sessions today
+            </p>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            Hostel meals served across all 4 sessions today
-          </p>
+
+          {onNavigateMess && (
+            <button
+              type="button"
+              onClick={onNavigateMess}
+              className="sm:hidden inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline px-2 py-1 active:scale-95 touch-manipulation shrink-0 whitespace-nowrap"
+            >
+              <span>Full Menu</span>
+              <ArrowRight className="size-3.5" />
+            </button>
+          )}
         </div>
 
         {/* Category Toggle (International / Veg / Non-Veg) */}
-        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-          <div className="inline-flex p-1 rounded-xl bg-muted/80 border border-border/70 gap-1">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="grid grid-cols-3 w-full sm:inline-flex p-1 rounded-xl bg-muted/80 border border-border/70 gap-1">
             <button
               type="button"
               onClick={() => setCategory("veg")}
               className={cn(
-                "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all duration-200",
+                "flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-200 min-h-[36px] active:scale-95 touch-manipulation",
                 category === "veg"
                   ? "bg-background text-foreground shadow-xs border border-border/60"
                   : "text-muted-foreground hover:text-foreground"
@@ -222,7 +235,7 @@ export function TodayMenuCard({ onNavigateMess }: TodayMenuCardProps) {
               type="button"
               onClick={() => setCategory("non-veg")}
               className={cn(
-                "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all duration-200",
+                "flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-200 min-h-[36px] active:scale-95 touch-manipulation",
                 category === "non-veg"
                   ? "bg-background text-foreground shadow-xs border border-border/60"
                   : "text-muted-foreground hover:text-foreground"
@@ -236,14 +249,14 @@ export function TodayMenuCard({ onNavigateMess }: TodayMenuCardProps) {
               type="button"
               onClick={() => setCategory("international")}
               className={cn(
-                "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all duration-200",
+                "flex items-center justify-center gap-1.5 rounded-lg px-2 sm:px-3 py-1.5 text-xs font-semibold transition-all duration-200 min-h-[36px] active:scale-95 touch-manipulation",
                 category === "international"
                   ? "bg-background text-foreground shadow-xs border border-border/60"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
               <Globe className="size-3.5 text-sky-500" />
-              <span>International</span>
+              <span>Int'l</span>
             </button>
           </div>
 
@@ -251,7 +264,7 @@ export function TodayMenuCard({ onNavigateMess }: TodayMenuCardProps) {
             <button
               type="button"
               onClick={onNavigateMess}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline px-2 py-1"
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline px-2 py-1 active:scale-95 touch-manipulation shrink-0"
             >
               <span>Full Menu</span>
               <ArrowRight className="size-3.5" />

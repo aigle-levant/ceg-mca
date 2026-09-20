@@ -456,21 +456,20 @@ export function MessMenuView() {
 
       {/* ── 3. Mess Category Switcher Tabs ── */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex p-1 rounded-2xl bg-muted/70 border border-border/70 max-w-fit flex-wrap gap-1">
+        <div className="grid grid-cols-3 sm:inline-flex p-1 rounded-2xl bg-muted/70 border border-border/70 w-full sm:w-auto gap-1">
           {/* Veg Mess Button */}
           <button
             type="button"
             onClick={() => setSelectedCategory("veg")}
             className={cn(
-              "flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200",
+              "flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[38px] active:scale-95 touch-manipulation",
               selectedCategory === "veg"
                 ? "bg-background text-foreground shadow-xs border border-border/60"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <Leaf className="size-4 text-emerald-500" />
-            <span>Vegetarian</span>
-
+            <Leaf className="size-3.5 sm:size-4 text-emerald-500" />
+            <span>Veg</span>
           </button>
 
           {/* Non-Veg Mess Button */}
@@ -478,15 +477,14 @@ export function MessMenuView() {
             type="button"
             onClick={() => setSelectedCategory("non-veg")}
             className={cn(
-              "flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200",
+              "flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[38px] active:scale-95 touch-manipulation",
               selectedCategory === "non-veg"
                 ? "bg-background text-foreground shadow-xs border border-border/60"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <Beef className="size-4 text-rose-500" />
-            <span>Non-Vegetarian</span>
-
+            <Beef className="size-3.5 sm:size-4 text-rose-500" />
+            <span>Non-Veg</span>
           </button>
 
           {/* International Mess Button */}
@@ -494,15 +492,14 @@ export function MessMenuView() {
             type="button"
             onClick={() => setSelectedCategory("international")}
             className={cn(
-              "flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200",
+              "flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 min-h-[38px] active:scale-95 touch-manipulation",
               selectedCategory === "international"
                 ? "bg-background text-foreground shadow-xs border border-border/60"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <Globe className="size-4 text-sky-500" />
-            <span>International</span>
-
+            <Globe className="size-3.5 sm:size-4 text-sky-500" />
+            <span>Int'l</span>
           </button>
         </div>
 
@@ -638,7 +635,7 @@ export function MessMenuView() {
         </div>
 
         {/* Days pill row */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none -mx-3 px-3 sm:mx-0 sm:px-0">
           {DAYS.map((day) => {
             const isSelected = selectedDay === day;
             const isToday = day === todayName;
@@ -649,7 +646,7 @@ export function MessMenuView() {
                 type="button"
                 onClick={() => setSelectedDay(day)}
                 className={cn(
-                  "relative flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 border",
+                  "relative flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-200 border active:scale-95 touch-manipulation",
                   isSelected
                     ? "bg-primary text-primary-foreground border-primary shadow-xs"
                     : "bg-card border-border/80 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"

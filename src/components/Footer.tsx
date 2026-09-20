@@ -17,7 +17,7 @@ interface FooterProps {
 export function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="border-t border-border bg-[#F7F3EE] dark:bg-[#150F12] text-foreground dark:text-[#F7F1EB] transition-colors duration-300">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24 pb-24 md:pb-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] md:pb-24">
         {/* Hero / Quote */}
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl space-y-5">

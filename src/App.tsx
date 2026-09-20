@@ -71,19 +71,19 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between">
+    <div className="min-h-screen bg-background text-foreground flex flex-col justify-between overflow-x-hidden">
       <div>
         <Navbar currentPage={currentPage} onNavigate={navigate} />
 
-        <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-8 pb-28 md:pb-20 pt-20 sm:pt-24 md:pt-28">
+        <main className="mx-auto w-full max-w-6xl px-3 sm:px-6 md:px-8 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-20 pt-[calc(3.75rem+env(safe-area-inset-top,0px))] sm:pt-24 md:pt-28">
           {/* ========================================================= */}
           {/* 1. DASHBOARD PAGE                                         */}
           {/* ========================================================= */}
           {currentPage === "dashboard" && (
             <div>
-              {/* Batch Toggle & Dashboard Header */}
-              <div className="mb-6 sm:mb-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
+              {/* Batch Toggle & Dashboard Header (Centered only on mobile) */}
+              <div className="mb-6 sm:mb-10 flex flex-col items-center text-center sm:items-start sm:text-left sm:flex-row sm:justify-between gap-3 sm:gap-4">
+                <div className="flex flex-col items-center sm:items-start">
                   <div className="mb-1.5 sm:mb-2 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-primary">
                     <span className="size-1.5 rounded-full bg-primary" />
                     College of Engineering, Guindy • MCA
@@ -101,7 +101,7 @@ function App() {
                   </p>
                 </div>
 
-                <div className="self-start sm:self-auto flex flex-wrap items-center gap-2 sm:gap-2.5">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-2.5 w-full sm:w-auto">
                   <BatchToggle mode={mode} onModeChange={handleModeChange} />
                   <CourseToggle mode={courseMode} onModeChange={handleCourseModeChange} />
                 </div>
@@ -122,12 +122,12 @@ function App() {
                   Quick Access
                 </h2>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
                   {/* Timetable Card */}
                   <button
                     type="button"
                     onClick={() => navigate("timetable")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-primary/10 text-primary border border-primary/20 transition-transform group-hover:scale-105">
@@ -151,7 +151,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => navigate("exams")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-transform group-hover:scale-105">
@@ -175,7 +175,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => navigate("subjects")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 transition-transform group-hover:scale-105">
@@ -199,7 +199,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => navigate("staff")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 transition-transform group-hover:scale-105">
@@ -223,7 +223,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => navigate("mess")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm col-span-2 sm:col-span-1"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm col-span-2 sm:col-span-1 active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-transform group-hover:scale-105">
@@ -288,8 +288,8 @@ function App() {
             <div>
               <PageBreadcrumb onBack={() => navigate("dashboard")} current="Timetable" />
 
-              <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
+              <div className="mb-8 flex flex-col items-center text-center sm:items-start sm:text-left sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex flex-col items-center sm:items-start">
                   <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                     Timetable
                   </h1>
@@ -299,7 +299,7 @@ function App() {
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-2.5 w-full sm:w-auto">
                   <BatchToggle mode={mode} onModeChange={handleModeChange} />
                   <CourseToggle mode={courseMode} onModeChange={handleCourseModeChange} />
 
@@ -307,7 +307,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
-                      className="flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground shadow-2xs"
+                      className="flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground shadow-2xs active:scale-95 touch-manipulation"
                     >
                       <Pencil className="size-3.5" />
                       Edit
@@ -341,7 +341,7 @@ function App() {
             <div>
               <PageBreadcrumb onBack={() => navigate("dashboard")} current="Exams" />
 
-              <div className="mb-8">
+              <div className="mb-8 text-center sm:text-left">
                 <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                   Exam Schedule
                 </h1>
@@ -361,7 +361,7 @@ function App() {
             <div>
               <PageBreadcrumb onBack={() => navigate("dashboard")} current="Subjects" />
 
-              <div className="mb-8">
+              <div className="mb-8 text-center sm:text-left">
                 <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                   Subjects & Syllabus
                 </h1>
@@ -381,7 +381,7 @@ function App() {
             <div>
               <PageBreadcrumb onBack={() => navigate("dashboard")} current="Staff Directory" />
 
-              <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mb-8 flex flex-col items-center text-center sm:items-start sm:text-left sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                     Faculty Directory
@@ -424,17 +424,17 @@ function PageBreadcrumb({
   current: string;
 }) {
   return (
-    <div className="mb-6 flex items-center gap-2 text-xs text-muted-foreground">
+    <div className="mb-4 sm:mb-6 flex items-center gap-2 text-xs text-muted-foreground">
       <button
         type="button"
         onClick={onBack}
-        className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
+        className="inline-flex items-center gap-1.5 py-1.5 px-2 -ml-2 rounded-lg transition-colors hover:text-foreground active:bg-muted active:scale-95 touch-manipulation font-medium text-xs sm:text-sm"
       >
-        <ChevronLeft className="size-3.5" />
+        <ChevronLeft className="size-4" />
         Dashboard
       </button>
       <span>/</span>
-      <span className="font-semibold text-foreground">{current}</span>
+      <span className="font-semibold text-foreground truncate max-w-[200px] sm:max-w-none">{current}</span>
     </div>
   );
 }

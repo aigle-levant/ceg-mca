@@ -230,15 +230,15 @@ export function TimetableEditor({
   return (
     <div className="relative">
       {/* Header bar */}
-      <div className="mb-6 flex items-center justify-between rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-3">
-        <div className="flex items-center gap-2 text-sm font-medium text-amber-400">
-          <AlertCircle className="size-4" />
-          Editing {mode === "regular" ? "Regular" : "Evening"} timetable
+      <div className="mb-5 sm:mb-6 flex flex-wrap items-center justify-between gap-2.5 rounded-xl sm:rounded-2xl border border-amber-500/20 bg-amber-500/5 px-3.5 sm:px-5 py-2.5 sm:py-3">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-amber-500 dark:text-amber-400">
+          <AlertCircle className="size-4 shrink-0" />
+          <span>Editing {mode === "regular" ? "Regular" : "Evening"} timetable</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ml-auto sm:ml-0">
           <button
             onClick={onCancel}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs sm:text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-95 touch-manipulation"
           >
             <X className="size-3.5" />
             Cancel
@@ -246,7 +246,7 @@ export function TimetableEditor({
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 disabled:opacity-50"
+            className="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 sm:px-4 py-1.5 text-xs sm:text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 disabled:opacity-50 active:scale-95 touch-manipulation"
           >
             <Save className="size-3.5" />
             {saving ? "Saving…" : "Save"}
@@ -261,22 +261,24 @@ export function TimetableEditor({
       )}
 
       {/* Day tabs */}
-      <div className="mb-5 sm:mb-6 flex gap-1 sm:gap-1.5 overflow-x-auto rounded-xl sm:rounded-2xl border border-border/80 bg-card p-1 sm:p-1.5 scrollbar-none">
-        {WEEKDAYS.map((day) => (
-          <button
-            key={day}
-            onClick={() => setSelectedDay(day)}
-            className={cn(
-              "flex-shrink-0 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all duration-200",
-              day === selectedDay
-                ? "bg-primary text-primary-foreground font-semibold shadow-xs"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-            )}
-          >
-            <span className="hidden sm:inline">{day}</span>
-            <span className="sm:hidden">{day.slice(0, 3)}</span>
-          </button>
-        ))}
+      <div className="mb-5 sm:mb-6 -mx-3 px-3 sm:mx-0 sm:px-0 flex gap-1.5 overflow-x-auto scrollbar-none touch-pan-x">
+        <div className="flex w-full min-w-max sm:w-auto gap-1 sm:gap-1.5 rounded-2xl border border-border bg-card p-1 sm:p-1.5">
+          {WEEKDAYS.map((day) => (
+            <button
+              key={day}
+              onClick={() => setSelectedDay(day)}
+              className={cn(
+                "flex-1 sm:flex-initial rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all duration-200 min-h-[40px] sm:min-h-[44px] flex items-center justify-center active:scale-95 touch-manipulation",
+                day === selectedDay
+                  ? "bg-primary text-primary-foreground font-semibold shadow-xs"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
+            >
+              <span className="hidden sm:inline">{day}</span>
+              <span className="sm:hidden font-semibold">{day.slice(0, 3)}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Entry list */}

@@ -22,7 +22,7 @@ export function BatchToggle({ mode, onModeChange }: BatchToggleProps) {
         type="button"
         onClick={() => onModeChange("regular")}
         className={cn(
-          "relative z-10 flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
+          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200 active:scale-95 touch-manipulation",
           mode === "regular"
             ? "text-foreground font-semibold"
             : "text-muted-foreground hover:text-foreground/80"
@@ -36,7 +36,7 @@ export function BatchToggle({ mode, onModeChange }: BatchToggleProps) {
         type="button"
         onClick={() => onModeChange("evening")}
         className={cn(
-          "relative z-10 flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200",
+          "relative z-10 flex items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-colors duration-200 active:scale-95 touch-manipulation",
           mode === "evening"
             ? "text-foreground font-semibold"
             : "text-muted-foreground hover:text-foreground/80"

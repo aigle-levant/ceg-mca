@@ -110,7 +110,7 @@ function SubjectCard({ course }: { course: SemesterCourse }) {
       {/* Header (clickable) */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex w-full items-center gap-3 sm:gap-4 p-3.5 sm:p-5 text-left transition-colors"
+        className="flex w-full items-center gap-3 sm:gap-4 p-3.5 sm:p-5 text-left transition-colors active:bg-muted/40 touch-manipulation"
       >
         <div
           className={cn(
@@ -164,7 +164,7 @@ function SubjectCard({ course }: { course: SemesterCourse }) {
         )}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-border px-5 pb-5 pt-4">
+          <div className="border-t border-border px-3.5 sm:px-5 pb-4 sm:pb-5 pt-3 sm:pt-4">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
               Syllabus
             </p>

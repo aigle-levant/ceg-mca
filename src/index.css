@@ -192,6 +192,8 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -199,7 +201,12 @@
   }
   html {
     @apply font-sans scroll-smooth;
+    -webkit-text-size-adjust: 100%;
   }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* Hide scrollbar on tab bars */

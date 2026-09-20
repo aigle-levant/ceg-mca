@@ -26,30 +26,30 @@ export function StaffDirectory({
   return (
     <div>
       {/* Tab switcher */}
-      <div className="mb-6 flex gap-2">
+      <div className="mb-6 grid grid-cols-2 sm:flex gap-2">
         <button
           onClick={() => setTab("regular")}
           className={cn(
-            "flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200",
+            "flex items-center justify-center gap-2 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 touch-manipulation min-h-[42px]",
             tab === "regular"
               ? "bg-primary text-primary-foreground shadow-xs font-semibold"
               : "bg-card text-muted-foreground border border-border/80 hover:bg-muted hover:text-foreground"
           )}
         >
-          <Sun className={cn("size-4", tab === "regular" ? "text-primary-foreground" : "text-amber-500")} />
-          Regular Batch
+          <Sun className={cn("size-3.5 sm:size-4", tab === "regular" ? "text-primary-foreground" : "text-amber-500")} />
+          <span>Regular Batch</span>
         </button>
         <button
           onClick={() => setTab("evening")}
           className={cn(
-            "flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200",
+            "flex items-center justify-center gap-2 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 touch-manipulation min-h-[42px]",
             tab === "evening"
               ? "bg-primary text-primary-foreground shadow-xs font-semibold"
               : "bg-card text-muted-foreground border border-border/80 hover:bg-muted hover:text-foreground"
           )}
         >
-          <Moon className={cn("size-4", tab === "evening" ? "text-primary-foreground" : "text-amber-400")} />
-          Evening Batch
+          <Moon className={cn("size-3.5 sm:size-4", tab === "evening" ? "text-primary-foreground" : "text-amber-400")} />
+          <span>Evening Batch</span>
         </button>
       </div>
 
