@@ -9,7 +9,7 @@ import {
   ChevronLeft,
   UtensilsCrossed,
 } from "lucide-react";
-import type { BatchMode, Timetable } from "@/types/schedule";
+import type { BatchMode, CourseMode, Timetable } from "@/types/schedule";
 import { useSchedule } from "@/hooks/useSchedule";
 import { useNavigation } from "@/hooks/useNavigation";
 import { saveTimetable } from "@/lib/api";
@@ -22,6 +22,7 @@ import { SubjectsView } from "@/components/SubjectsView";
 import { MessMenuView } from "@/components/MessMenuView";
 import { TodayMenuCard } from "@/components/TodayMenuCard";
 import { BatchToggle } from "@/components/BatchToggle";
+import { CourseToggle } from "@/components/CourseToggle";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
@@ -29,9 +30,38 @@ import profsRegular from "@/data/profs-regular.json";
 import profsEvening from "@/data/profs-evening.json";
 
 function App() {
-  const [mode, setMode] = useState<BatchMode>("regular");
+  const [mode, setMode] = useState<BatchMode>(() => {
+    try {
+      return (localStorage.getItem("ceg-batch-mode") as BatchMode) || "regular";
+    } catch {
+      return "regular";
+    }
+  });
+
+  const [courseMode, setCourseMode] = useState<CourseMode>(() => {
+    try {
+      return (localStorage.getItem("ceg-course-mode") as CourseMode) || "bridge";
+    } catch {
+      return "bridge";
+    }
+  });
+
+  const handleModeChange = (newMode: BatchMode) => {
+    setMode(newMode);
+    try {
+      localStorage.setItem("ceg-batch-mode", newMode);
+    } catch {}
+  };
+
+  const handleCourseModeChange = (newMode: CourseMode) => {
+    setCourseMode(newMode);
+    try {
+      localStorage.setItem("ceg-course-mode", newMode);
+    } catch {}
+  };
+
   const [isEditing, setIsEditing] = useState(false);
-  const schedule = useSchedule(mode);
+  const schedule = useSchedule(mode, courseMode);
   const { currentPage, navigate } = useNavigation();
 
   async function handleSaveTimetable(data: Timetable) {
@@ -71,8 +101,9 @@ function App() {
                   </p>
                 </div>
 
-                <div className="self-start sm:self-auto">
-                  <BatchToggle mode={mode} onModeChange={setMode} />
+                <div className="self-start sm:self-auto flex flex-wrap items-center gap-2 sm:gap-2.5">
+                  <BatchToggle mode={mode} onModeChange={handleModeChange} />
+                  <CourseToggle mode={courseMode} onModeChange={handleCourseModeChange} />
                 </div>
               </div>
 
@@ -262,19 +293,21 @@ function App() {
                   <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                     Timetable
                   </h1>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {mode === "regular" ? "Regular" : "Evening"} batch weekly schedule
+                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                    {mode === "regular" ? "Regular" : "Evening"} batch •{" "}
+                    {courseMode === "non-bridge" ? "Non-Bridge" : "Bridge included"} schedule
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <BatchToggle mode={mode} onModeChange={setMode} />
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                  <BatchToggle mode={mode} onModeChange={handleModeChange} />
+                  <CourseToggle mode={courseMode} onModeChange={handleCourseModeChange} />
 
                   {!isEditing && (
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
-                      className="flex items-center gap-1.5 rounded-xl border border-border/80 bg-card px-3.5 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground"
+                      className="flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3.5 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-muted-foreground transition-all hover:border-border hover:bg-muted hover:text-foreground shadow-2xs"
                     >
                       <Pencil className="size-3.5" />
                       Edit

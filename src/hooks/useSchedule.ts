@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import type { BatchMode, ParsedClass, Timetable } from "@/types/schedule";
+import type { BatchMode, CourseMode, ParsedClass, Timetable } from "@/types/schedule";
 import {
   getDayName,
   getCurrentMinutes,
@@ -14,7 +14,7 @@ import profsRegular from "@/data/profs-regular.json";
 import profsEvening from "@/data/profs-evening.json";
 import subjectsData from "@/data/subjects.json";
 
-export function useSchedule(mode: BatchMode) {
+export function useSchedule(mode: BatchMode, courseMode: CourseMode = "bridge") {
   const [now, setNow] = useState(new Date());
   const [regularData, setRegularData] = useState<Timetable>(
     timetableRegular as unknown as Timetable
@@ -42,10 +42,13 @@ export function useSchedule(mode: BatchMode) {
     [mode]
   );
 
-  const todaySchedule = useMemo(
-    () => buildDaySchedule(timetable, profs, subjectsData, day),
-    [timetable, profs, day]
-  );
+  const todaySchedule = useMemo(() => {
+    const raw = buildDaySchedule(timetable, profs, subjectsData, day);
+    if (courseMode === "non-bridge") {
+      return raw.filter((c) => !c.isBridge);
+    }
+    return raw;
+  }, [timetable, profs, day, courseMode]);
 
   const currentClass = useMemo(
     () => findCurrentClass(todaySchedule, currentMinutes),
@@ -59,9 +62,13 @@ export function useSchedule(mode: BatchMode) {
 
   const getScheduleForDay = useCallback(
     (dayName: string): ParsedClass[] => {
-      return buildDaySchedule(timetable, profs, subjectsData, dayName);
+      const raw = buildDaySchedule(timetable, profs, subjectsData, dayName);
+      if (courseMode === "non-bridge") {
+        return raw.filter((c) => !c.isBridge);
+      }
+      return raw;
     },
-    [timetable, profs]
+    [timetable, profs, courseMode]
   );
 
   return {

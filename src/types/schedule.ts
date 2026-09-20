@@ -1,4 +1,5 @@
 export type BatchMode = "regular" | "evening";
+export type CourseMode = "non-bridge" | "bridge";
 
 export interface TimetableEntry {
   time: string;
