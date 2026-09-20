@@ -5,6 +5,7 @@ import {
   Users,
   Zap,
   BookOpen,
+  UtensilsCrossed,
 } from "lucide-react";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import type { PageId } from "@/hooks/useNavigation";
@@ -21,6 +22,7 @@ const navItems: { id: PageId; label: string; href: string; icon: typeof Zap }[] 
   { id: "exams", label: "Exams", href: "#/exams", icon: CalendarCheck },
   { id: "subjects", label: "Subjects", href: "#/subjects", icon: BookOpen },
   { id: "staff", label: "Staff", href: "#/staff", icon: Users },
+  { id: "mess", label: "Mess", href: "#/mess", icon: UtensilsCrossed },
 ];
 
 export function Navbar({ currentPage, onNavigate }: NavbarProps) {
@@ -35,8 +37,8 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
             onClick={() => onNavigate("dashboard")}
             className="flex items-center gap-2 rounded-full px-1.5 py-1 font-semibold group transition-colors text-left"
           >
-            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xs transition-transform group-hover:scale-105">
-              <GraduationCap className="size-4" />
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-full overflow-hidden transition-transform group-hover:scale-105">
+              <img src="/ceg-logo.png" alt="CEG Crest" className="size-full object-contain drop-shadow-xs" />
             </div>
 
             <div className="flex flex-col leading-none">
@@ -92,7 +94,7 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
         aria-label="Mobile Navigation"
         className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border/80 bg-background/95 backdrop-blur-lg px-1 pt-1.5 pb-2 shadow-lg"
       >
-        <div className="flex items-center justify-around max-w-md mx-auto">
+        <div className="flex items-center justify-around max-w-lg mx-auto">
           {navItems.map(({ id, label, href, icon: Icon }) => {
             const isActive = currentPage === id;
             return (

@@ -7,6 +7,7 @@ import {
   BookOpen,
   ArrowRight,
   ChevronLeft,
+  UtensilsCrossed,
 } from "lucide-react";
 import type { BatchMode, Timetable } from "@/types/schedule";
 import { useSchedule } from "@/hooks/useSchedule";
@@ -18,6 +19,8 @@ import { TimetableEditor } from "@/components/TimetableEditor";
 import { StaffDirectory } from "@/components/StaffDirectory";
 import { ExamDates } from "@/components/ExamDates";
 import { SubjectsView } from "@/components/SubjectsView";
+import { MessMenuView } from "@/components/MessMenuView";
+import { TodayMenuCard } from "@/components/TodayMenuCard";
 import { BatchToggle } from "@/components/BatchToggle";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -88,7 +91,7 @@ function App() {
                   Quick Access
                 </h2>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
                   {/* Timetable Card */}
                   <button
                     type="button"
@@ -184,7 +187,36 @@ function App() {
                       <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
                     </div>
                   </button>
+
+                  {/* Mess Menu Card */}
+                  <button
+                    type="button"
+                    onClick={() => navigate("mess")}
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3.5 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm col-span-2 sm:col-span-1"
+                  >
+                    <div>
+                      <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-transform group-hover:scale-105">
+                        <UtensilsCrossed className="size-4 sm:size-5" />
+                      </div>
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                        Mess Menu
+                      </h3>
+                      <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-muted-foreground line-clamp-2">
+                        Veg, Non-Veg & Intl menus
+                      </p>
+                    </div>
+
+                    <div className="mt-4 sm:mt-6 flex items-center gap-1 text-[11px] sm:text-xs font-medium text-primary">
+                      <span>View</span>
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </button>
                 </div>
+              </section>
+
+              {/* Today's Mess Menu Card with Toggle */}
+              <section className="mb-10 sm:mb-14">
+                <TodayMenuCard onNavigateMess={() => navigate("mess")} />
               </section>
 
               {/* Today's Schedule Overview */}
@@ -331,6 +363,16 @@ function App() {
                 regularProfs={profsRegular}
                 eveningProfs={profsEvening}
               />
+            </div>
+          )}
+
+          {/* ========================================================= */}
+          {/* 6. MESS MENU PAGE                                         */}
+          {/* ========================================================= */}
+          {currentPage === "mess" && (
+            <div>
+              <PageBreadcrumb onBack={() => navigate("dashboard")} current="Mess Menu" />
+              <MessMenuView />
             </div>
           )}
         </main>

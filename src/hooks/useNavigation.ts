@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-export type PageId = "dashboard" | "timetable" | "exams" | "subjects" | "staff";
+export type PageId = "dashboard" | "timetable" | "exams" | "subjects" | "staff" | "mess";
 
 export function useNavigation() {
   const getPageFromHash = (): PageId => {
@@ -9,6 +9,7 @@ export function useNavigation() {
     if (raw === "exams") return "exams";
     if (raw === "subjects") return "subjects";
     if (raw === "staff") return "staff";
+    if (raw === "mess" || raw === "mess-menu") return "mess";
     return "dashboard";
   };
 

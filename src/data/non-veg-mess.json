@@ -1,0 +1,55 @@
+{
+    "institution": "Engineering College Hostels, CEG Campus, Anna University, Chennai - 25",
+    "date_range": "15.09.2026 to 31.01.2027",
+    "menu_type": "Non-Veg",
+    "days": {
+        "Monday": {
+            "breakfast": "Sweet Pongal, Pongal, Methu vadai, Sambar, Coconut chutney, T/C/M",
+            "lunch": "Rice, Vatha Kuzhambu, Keerai Koottu, Rasam, Buttermilk, Vadagam, Pickle, Gulabjamun",
+            "snacks": "Tea Cake, T/C/M",
+            "dinner": "Onion Uthappam, Sambar, Paruppu Chutney/Mint Chutney, Boost"
+        },
+        "Tuesday": {
+            "breakfast": "Samba Rava Kitchadi, Idiyappam, Coconut Milk, Veg Kurma, Boiled Egg, T/C/M",
+            "lunch": "Rice, Sambar, Beetroot Poriyal, Rasam, Buttermilk, Botti Appalam, Pickle",
+            "snacks": "Butter Biscuit, T/C/M",
+            "dinner": "Chapathi, Channa Masala/Veg Kurma, Curd Rice, Lemon Juice"
+        },
+        "Wednesday": {
+            "breakfast": "Semiya Kitchadi, Coconut Chutney, Bread, Jam, T/C/M",
+            "lunch": "Rice, Chicken Gravy/Fish Kuzhambu/Fish Fry, Chicken Gravy, Rasam, Curd, Nannari Sarbath",
+            "snacks": "Keerai Vadai, T/C/M",
+            "dinner": "Idly, Sambar, Coconut Chutney, Podi, Oil, Badam Milk"
+        },
+        "Thursday": {
+            "breakfast": "Kal Dosai, Sambar, Groundnut Chutney, T/C/M",
+            "lunch": "Rice, Egg Kuzhambu, Boiled Egg, Cabbage Poriyal, Vadagam, Rasam, Buttermilk, Pickle",
+            "snacks": "White Channa/Black Channa, T/C/M",
+            "dinner": "Chapathi, Mushroom Gravy/Paneer Butter Masala, Curd Rice, Lemon Juice"
+        },
+        "Friday": {
+            "breakfast": "Idly, Sambar/Tomato Kurma, Coconut Chutney, Idly Podi, Oil, Fruit Kesari, T/C/M",
+            "lunch": "Rice, Dhall, Potato Peas Poriyal, Podi, Oil, Ghee, Rasam, Curd, Appalam, Pickle, Semiya Payasam/Dhall Payasam",
+            "snacks": "Pani Poori, T/C/M",
+            "dinner": "Veg Pulao, Gobi Machuriyan, Onion Raita, Nannari Sarbath"
+        },
+        "Saturday": {
+            "breakfast": "Poori, Channa Masala, Coconut Chutney, T/C/M",
+            "lunch": "Rice, Sambar, Yam Poriyal, Vadagam, Rasam, Buttermilk, Pickle",
+            "snacks": "Groundnut, T/C/M",
+            "dinner": "Dosai, Sambar, Kara Chutney/Paruppu Chutney/Mint Chutney, Milk"
+        },
+        "Sunday": {
+            "breakfast": "Bread Omelet, Bread Toast, Rava Kitchadi, Kurma, Jam, Butter, Tomato Sauce, Chilli Sauce, T/C/M",
+            "lunch": "Chicken Biriyani, Chicken-65, Chicken Kurma, Onion Raita, Rice, Rasam, Dairy Day Ice Cream (4th week flavours) / Arun Ice Cream, Mutton Biriyani, Arun Ice Cream",
+            "snacks": "Goodday Biscuit, T/C/M",
+            "dinner": "Lemon Rice, Curd Rice, Paruppu Thuvaraiyal, Vadagam, Pickle, Red Banana/Morris Banana"
+        }
+    },
+    "pickle": "Lemon / Amla / Ginger / Garlic",
+    "beverages": {
+        "T": "Tea",
+        "C": "Coffee",
+        "M": "Milk"
+    }
+}
