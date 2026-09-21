@@ -14,6 +14,7 @@ import { useSchedule } from "@/hooks/useSchedule";
 import { useNavigation } from "@/hooks/useNavigation";
 import { saveTimetable } from "@/lib/api";
 import { CurrentClassCard } from "@/components/CurrentClassCard";
+import { DeadlinesCard } from "@/components/DeadlinesCard";
 import { TimetableView } from "@/components/TimetableView";
 import { TimetableEditor } from "@/components/TimetableEditor";
 import { StaffDirectory } from "@/components/StaffDirectory";
@@ -50,14 +51,14 @@ function App() {
     setMode(newMode);
     try {
       localStorage.setItem("ceg-batch-mode", newMode);
-    } catch {}
+    } catch { }
   };
 
   const handleCourseModeChange = (newMode: CourseMode) => {
     setCourseMode(newMode);
     try {
       localStorage.setItem("ceg-course-mode", newMode);
-    } catch {}
+    } catch { }
   };
 
   const [isEditing, setIsEditing] = useState(false);
@@ -114,6 +115,11 @@ function App() {
                   upcomingClass={schedule.upcomingClass}
                   currentMinutes={schedule.currentMinutes}
                 />
+              </section>
+
+              {/* Upcoming Deadlines */}
+              <section className="mb-8 sm:mb-12">
+                <DeadlinesCard />
               </section>
 
               {/* Quick Navigation Cards */}

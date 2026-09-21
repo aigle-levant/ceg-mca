@@ -41,3 +41,16 @@ export interface ParsedClass {
   isLab: boolean;
   isBridge: boolean;
 }
+
+export interface DeadlineItem {
+  subjectCode: string;
+  subjectName: string;
+  title: string;
+  deadline: string;
+}
+
+export interface DeadlinesData {
+  urgent: DeadlineItem[];
+  upcoming?: DeadlineItem[];
+}
+

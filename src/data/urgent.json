@@ -1,0 +1,22 @@
+{
+    "upcoming": [
+        {
+            "subjectCode": "CA3104",
+            "subjectName": "Computer Networks and Management",
+            "title": "Assignment 1 - Digital Data Encoding Techniques",
+            "deadline": "2026-09-22"
+        },
+        {
+            "subjectCode": "CA3104",
+            "subjectName": "Computer Networks and Management",
+            "title": "Assignment 2 - IP Addressing",
+            "deadline": "2026-09-22"
+        },
+        {
+            "subjectCode": "CA3103 Lab",
+            "subjectName": "Java Programming Lab",
+            "title": "Labwork",
+            "deadline": "2026-09-23"
+        }
+    ]
+}
