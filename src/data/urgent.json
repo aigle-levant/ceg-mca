@@ -3,38 +3,20 @@
     {
       "subjectCode": "CA3103 Lab",
       "subjectName": "Java Programming Lab",
-      "title": "Labwork",
-      "deadline": "2026-09-25"
+      "title": "Activity - I",
+      "deadline": "2026-10-01"
     },
     {
-      "subjectCode": "CA3104",
-      "subjectName": "Computer Networks and Management",
-      "title": "Assignment 1 - Digital Data Encoding Techniques",
-      "deadline": "2026-09-28"
+      "subjectCode": "CA3103 Lab",
+      "subjectName": "Java Programming Lab",
+      "title": "Observation: 10 exercises",
+      "deadline": "2026-10-09"
     },
     {
-      "subjectCode": "CA3104",
-      "subjectName": "Computer Networks and Management",
-      "title": "Assignment 2 - IP Addressing",
-      "deadline": "2026-09-28"
+      "subjectCode": "CA3101",
+      "subjectName": "Data Structures",
+      "title": "Linked List implementation in C language",
+      "deadline": "2026-10-06"
     },
-    {
-      "subjectCode": "CA3104",
-      "subjectName": "Computer Networks and Management",
-      "title": "Assignment 3 - Bandwidth Delay Product (1-2 pages)",
-      "deadline": "2026-09-28"
-    },
-    {
-      "subjectCode": "CA3104",
-      "subjectName": "Computer Networks and Management",
-      "title": "Assignment 4 - Internetworking Devices",
-      "deadline": "2026-09-28"
-    },
-    {
-      "subjectCode": "CA3104",
-      "subjectName": "Computer Networks and Management",
-      "title": "Assignment 5 - OSI Model Functionalities (1-2 pages)",
-      "deadline": "2026-09-28"
-    }
   ]
 }
