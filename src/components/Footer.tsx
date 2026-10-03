@@ -5,6 +5,7 @@ const navigation: { id: PageId; label: string; href: string }[] = [
   { id: "dashboard", label: "Dashboard", href: "#/" },
   { id: "timetable", label: "Timetable", href: "#/timetable" },
   { id: "exams", label: "Exams", href: "#/exams" },
+  { id: "assignments", label: "Assignments", href: "#/assignments" },
   { id: "subjects", label: "Subjects", href: "#/subjects" },
   { id: "staff", label: "Staff", href: "#/staff" },
   { id: "mess", label: "Mess Menu", href: "#/mess" },

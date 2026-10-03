@@ -8,6 +8,7 @@ import {
   ArrowRight,
   ChevronLeft,
   UtensilsCrossed,
+  ClipboardList,
 } from "lucide-react";
 import type { BatchMode, CourseMode, Timetable } from "@/types/schedule";
 import { useSchedule } from "@/hooks/useSchedule";
@@ -20,15 +21,13 @@ import { TimetableEditor } from "@/components/TimetableEditor";
 import { StaffDirectory } from "@/components/StaffDirectory";
 import { ExamDates } from "@/components/ExamDates";
 import { SubjectsView } from "@/components/SubjectsView";
+import { AssignmentsView } from "@/components/AssignmentsView";
 import { MessMenuView } from "@/components/MessMenuView";
 import { TodayMenuCard } from "@/components/TodayMenuCard";
 import { BatchToggle } from "@/components/BatchToggle";
 import { CourseToggle } from "@/components/CourseToggle";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-
-import profsRegular from "@/data/profs-regular.json";
-import profsEvening from "@/data/profs-evening.json";
 
 function App() {
   const [mode, setMode] = useState<BatchMode>(() => {
@@ -51,14 +50,18 @@ function App() {
     setMode(newMode);
     try {
       localStorage.setItem("ceg-batch-mode", newMode);
-    } catch { }
+    } catch {
+      // ignore storage error
+    }
   };
 
   const handleCourseModeChange = (newMode: CourseMode) => {
     setCourseMode(newMode);
     try {
       localStorage.setItem("ceg-course-mode", newMode);
-    } catch { }
+    } catch {
+      // ignore storage error
+    }
   };
 
   const [isEditing, setIsEditing] = useState(false);
@@ -128,7 +131,7 @@ function App() {
                   Quick Access
                 </h2>
 
-                <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
                   {/* Timetable Card */}
                   <button
                     type="button"
@@ -168,6 +171,30 @@ function App() {
                       </h3>
                       <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-muted-foreground line-clamp-2">
                         CA 1, CA 2 & End Sem dates
+                      </p>
+                    </div>
+
+                    <div className="mt-4 sm:mt-6 flex items-center gap-1 text-[11px] sm:text-xs font-medium text-primary">
+                      <span>View</span>
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </button>
+
+                  {/* Assignments Card */}
+                  <button
+                    type="button"
+                    onClick={() => navigate("assignments")}
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
+                  >
+                    <div>
+                      <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 transition-transform group-hover:scale-105">
+                        <ClipboardList className="size-4 sm:size-5" />
+                      </div>
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                        Assignments
+                      </h3>
+                      <p className="mt-0.5 sm:mt-1 text-[11px] sm:text-xs text-muted-foreground line-clamp-2">
+                        Tasks, labs & submissions
                       </p>
                     </div>
 
@@ -229,7 +256,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => navigate("mess")}
-                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm col-span-2 sm:col-span-1 active:scale-[0.98] touch-manipulation"
+                    className="group relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card p-3 sm:p-5 text-left shadow-xs transition-all hover:border-primary/40 hover:shadow-sm active:scale-[0.98] touch-manipulation"
                   >
                     <div>
                       <div className="mb-3 sm:mb-4 flex size-9 sm:size-10 items-center justify-center rounded-lg sm:rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 transition-transform group-hover:scale-105">
@@ -361,6 +388,26 @@ function App() {
           )}
 
           {/* ========================================================= */}
+          {/* 3.5 ASSIGNMENTS PAGE                                      */}
+          {/* ========================================================= */}
+          {currentPage === "assignments" && (
+            <div>
+              <PageBreadcrumb onBack={() => navigate("dashboard")} current="Assignments" />
+
+              <div className="mb-8 text-center sm:text-left">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  Assignments & Tasks
+                </h1>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Continuous assessment submissions, lab work, and deadline tracker
+                </p>
+              </div>
+
+              <AssignmentsView />
+            </div>
+          )}
+
+          {/* ========================================================= */}
           {/* 4. SUBJECTS PAGE                                          */}
           {/* ========================================================= */}
           {currentPage === "subjects" && (
@@ -398,10 +445,7 @@ function App() {
                 </div>
               </div>
 
-              <StaffDirectory
-                regularProfs={profsRegular}
-                eveningProfs={profsEvening}
-              />
+              <StaffDirectory />
             </div>
           )}
 

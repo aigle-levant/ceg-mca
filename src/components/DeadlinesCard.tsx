@@ -5,9 +5,11 @@ import {
   BookOpen,
   CheckCircle2,
   Calendar,
+  ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { DeadlineItem, DeadlinesData } from "@/types/schedule";
+import { useDeadlines } from "@/hooks/useDeadlines";
 import deadlinesDataRaw from "@/data/urgent.json";
 
 const deadlinesData = deadlinesDataRaw as DeadlinesData;
@@ -124,8 +126,17 @@ function DeadlineCardItem({ item }: DeadlineCardItemProps) {
 }
 
 export function DeadlinesCard() {
+  const { deadlines: liveDeadlines } = useDeadlines();
+
   const deadlines: DeadlineItem[] =
-    deadlinesData.upcoming || deadlinesData.urgent || [];
+    liveDeadlines && liveDeadlines.length > 0
+      ? liveDeadlines.map((d) => ({
+          subjectCode: d.courses?.course_code ?? "MCA",
+          subjectName: d.courses?.course_name ?? "Anna University CEG",
+          title: d.title,
+          deadline: d.due_date,
+        }))
+      : deadlinesData.upcoming || deadlinesData.urgent || [];
 
   return (
     <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-7 md:p-9 shadow-xs transition-all duration-500">
@@ -142,17 +153,27 @@ export function DeadlinesCard() {
             </h2>
           </div>
 
-          {deadlines.length > 0 ? (
-            <span className="inline-flex self-start sm:self-center items-center gap-1.5 rounded-full bg-amber-500/15 border border-amber-500/25 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
-              <span className="size-1.5 animate-pulse rounded-full bg-amber-500 dark:bg-amber-400" />
-              {deadlines.length} Upcoming
-            </span>
-          ) : (
-            <span className="inline-flex self-start sm:self-center items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-500/25 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
-              <CheckCircle2 className="size-3.5" />
-              All Clear
-            </span>
-          )}
+          <div className="flex items-center gap-2.5">
+            {deadlines.length > 0 ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 border border-amber-500/25 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
+                <span className="size-1.5 animate-pulse rounded-full bg-amber-500 dark:bg-amber-400" />
+                {deadlines.length} Upcoming
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-500/25 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
+                <CheckCircle2 className="size-3.5" />
+                All Clear
+              </span>
+            )}
+
+            <a
+              href="#/assignments"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline group/link px-2 py-1"
+            >
+              <span>View All</span>
+              <ArrowRight className="size-3 transition-transform group-hover/link:translate-x-0.5" />
+            </a>
+          </div>
         </div>
 
         {/* Content */}

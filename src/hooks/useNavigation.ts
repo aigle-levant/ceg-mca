@@ -1,12 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
 
-export type PageId = "dashboard" | "timetable" | "exams" | "subjects" | "staff" | "mess";
+export type PageId =
+  | "dashboard"
+  | "timetable"
+  | "exams"
+  | "assignments"
+  | "subjects"
+  | "staff"
+  | "mess";
 
 export function useNavigation() {
   const getPageFromHash = (): PageId => {
     const raw = window.location.hash.replace(/^#\/?/, "").toLowerCase();
     if (raw === "timetable") return "timetable";
     if (raw === "exams") return "exams";
+    if (raw === "assignments" || raw === "assignment") return "assignments";
     if (raw === "subjects") return "subjects";
     if (raw === "staff") return "staff";
     if (raw === "mess" || raw === "mess-menu") return "mess";

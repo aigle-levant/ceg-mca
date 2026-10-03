@@ -5,6 +5,7 @@ import {
   Zap,
   BookOpen,
   UtensilsCrossed,
+  ClipboardList,
 } from "lucide-react";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import type { PageId } from "@/hooks/useNavigation";
@@ -19,6 +20,7 @@ const navItems: { id: PageId; label: string; shortLabel: string; href: string; i
   { id: "dashboard", label: "Dashboard", shortLabel: "Home", href: "#/", icon: Zap },
   { id: "timetable", label: "Timetable", shortLabel: "Timetable", href: "#/timetable", icon: CalendarDays },
   { id: "exams", label: "Exams", shortLabel: "Exams", href: "#/exams", icon: CalendarCheck },
+  { id: "assignments", label: "Assignments", shortLabel: "Tasks", href: "#/assignments", icon: ClipboardList },
   { id: "subjects", label: "Subjects", shortLabel: "Subjects", href: "#/subjects", icon: BookOpen },
   { id: "staff", label: "Staff", shortLabel: "Staff", href: "#/staff", icon: Users },
   { id: "mess", label: "Mess", shortLabel: "Mess", href: "#/mess", icon: UtensilsCrossed },
@@ -63,13 +65,13 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
                     onNavigate(id);
                   }}
                   className={cn(
-                    "flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm transition-all duration-200",
+                    "flex items-center gap-1.5 lg:gap-2 rounded-full px-2.5 lg:px-3.5 py-1.5 text-xs lg:text-sm transition-all duration-200",
                     isActive
                       ? "bg-primary text-primary-foreground font-semibold shadow-xs"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
-                  <Icon className="size-4" />
+                  <Icon className="size-3.5 lg:size-4" />
                   {label}
                 </a>
               );
@@ -93,7 +95,7 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
         aria-label="Mobile Navigation"
         className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border/80 bg-background/95 backdrop-blur-xl px-1 pt-1.5 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] shadow-[0_-4px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.4)]"
       >
-        <div className="grid grid-cols-6 w-full max-w-md mx-auto items-center">
+        <div className="grid grid-cols-7 w-full max-w-lg mx-auto items-center">
           {navItems.map(({ id, label, shortLabel, href, icon: Icon }) => {
             const isActive = currentPage === id;
             return (
@@ -122,7 +124,7 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
                 >
                   <Icon className="size-3.5" />
                 </div>
-                <span className="text-[10px] font-medium leading-none tracking-tight truncate max-w-full text-center block w-full">
+                <span className="text-[9px] sm:text-[10px] font-medium leading-none tracking-tight truncate max-w-full text-center block w-full">
                   {shortLabel}
                 </span>
               </a>
