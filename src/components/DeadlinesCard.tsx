@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import {
   CalendarClock,
   Clock,
@@ -6,10 +7,13 @@ import {
   CheckCircle2,
   Calendar,
   ArrowRight,
+  Edit3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { DeadlineItem, DeadlinesData } from "@/types/schedule";
 import { useDeadlines } from "@/hooks/useDeadlines";
+import type { DeadlineRecord } from "@/types/deadlines";
+import type { DeadlinesData } from "@/types/schedule";
+import { AssignmentModal } from "@/components/AssignmentModal";
 import deadlinesDataRaw from "@/data/urgent.json";
 
 const deadlinesData = deadlinesDataRaw as DeadlinesData;
@@ -18,7 +22,12 @@ function getDeadlineMeta(dateStr: string) {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const target = new Date(dateStr);
+
+    const parts = dateStr.split("-").map(Number);
+    const target =
+      parts.length === 3
+        ? new Date(parts[0], parts[1] - 1, parts[2])
+        : new Date(dateStr);
     target.setHours(0, 0, 0, 0);
 
     const diffDays = Math.round(
@@ -32,41 +41,61 @@ function getDeadlineMeta(dateStr: string) {
     });
 
     if (diffDays === 0)
-      return { label: "Due Today", badge: dateFormatted, urgent: true };
+      return { label: "Due Today", badge: dateFormatted, urgent: true, diffDays, isPastDue: false };
     if (diffDays === 1)
-      return { label: "Due Tomorrow", badge: dateFormatted, urgent: true };
+      return { label: "Due Tomorrow", badge: dateFormatted, urgent: true, diffDays, isPastDue: false };
     if (diffDays > 1 && diffDays <= 3)
-      return { label: `Due in ${diffDays} days`, badge: dateFormatted, urgent: true };
+      return { label: `Due in ${diffDays} days`, badge: dateFormatted, urgent: true, diffDays, isPastDue: false };
     if (diffDays > 3)
-      return { label: `Due in ${diffDays} days`, badge: dateFormatted, urgent: false };
+      return { label: `Due in ${diffDays} days`, badge: dateFormatted, urgent: false, diffDays, isPastDue: false };
     if (diffDays < 0)
-      return { label: "Past Due", badge: dateFormatted, urgent: true };
+      return { label: "Past Due", badge: dateFormatted, urgent: true, diffDays, isPastDue: true };
 
-    return { label: `Due ${dateFormatted}`, badge: dateFormatted, urgent: false };
+    return { label: `Due ${dateFormatted}`, badge: dateFormatted, urgent: false, diffDays, isPastDue: false };
   } catch {
-    return { label: dateStr, badge: dateStr, urgent: false };
+    return { label: dateStr, badge: dateStr, urgent: false, diffDays: 0, isPastDue: false };
   }
 }
 
 interface DeadlineCardItemProps {
-  item: DeadlineItem;
+  item: DeadlineRecord;
+  onClick: () => void;
 }
 
-function DeadlineCardItem({ item }: DeadlineCardItemProps) {
-  const meta = getDeadlineMeta(item.deadline);
+function DeadlineCardItem({ item, onClick }: DeadlineCardItemProps) {
+  const meta = getDeadlineMeta(item.due_date);
+  const subjectCode = item.courses?.course_code ?? "MCA";
+  const subjectName = item.courses?.course_name ?? "Anna University CEG";
+
   const isLab =
-    item.subjectCode.toLowerCase().includes("lab") ||
-    item.subjectName.toLowerCase().includes("lab");
-  const isBridge = item.subjectCode.startsWith("BX");
+    item.courses?.course_type?.toLowerCase() === "lab" ||
+    subjectCode.toLowerCase().includes("lab") ||
+    subjectName.toLowerCase().includes("lab") ||
+    item.title.toLowerCase().includes("lab");
+
+  const isBridge =
+    item.courses?.category?.toLowerCase().includes("bridge") ||
+    subjectCode.startsWith("BX");
 
   return (
-    <div className="group/item relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card/60 p-4 sm:p-5 shadow-xs transition-all duration-300 hover:border-amber-500/40 hover:bg-card/90">
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      className="group/item relative flex flex-col justify-between rounded-xl sm:rounded-2xl border border-border/80 bg-card/60 p-4 sm:p-5 shadow-xs transition-all duration-300 hover:border-primary/50 hover:bg-card/90 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-left select-none"
+    >
       <div>
         {/* Header Tags & Due Badge */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="inline-flex items-center rounded-lg bg-muted px-2.5 py-1 text-xs font-mono font-medium text-muted-foreground border border-border/50">
-              {item.subjectCode}
+              {subjectCode}
             </span>
 
             {isLab && (
@@ -80,6 +109,12 @@ function DeadlineCardItem({ item }: DeadlineCardItemProps) {
               <span className="inline-flex items-center gap-1 rounded-lg bg-amber-500/15 border border-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-700 dark:text-amber-300">
                 <BookOpen className="size-3" />
                 Bridge
+              </span>
+            )}
+
+            {item.batches?.batch && (
+              <span className="inline-flex items-center rounded-lg bg-secondary px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                {item.batches.batch}
               </span>
             )}
           </div>
@@ -101,24 +136,33 @@ function DeadlineCardItem({ item }: DeadlineCardItemProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mt-3 text-base sm:text-lg font-bold tracking-tight text-foreground line-clamp-2">
+        <h3 className="mt-3 text-base sm:text-lg font-bold tracking-tight text-foreground line-clamp-2 group-hover/item:text-primary transition-colors">
           {item.title}
         </h3>
 
         {/* Subject Name */}
         <p className="mt-1 text-xs sm:text-sm text-muted-foreground line-clamp-1">
-          {item.subjectName}
+          {subjectName}
         </p>
+
+        {/* Description snippet if exists */}
+        {item.description && (
+          <p className="mt-2 text-xs text-muted-foreground/80 line-clamp-2 bg-muted/30 px-2.5 py-1.5 rounded-lg border border-border/40">
+            {item.description}
+          </p>
+        )}
       </div>
 
-      {/* Footer with date */}
+      {/* Footer with date & quick tap action hint */}
       <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5 font-mono">
           <Calendar className="size-3.5 text-muted-foreground/80" />
           {meta.badge}
         </span>
-        <span className="font-medium text-amber-600 dark:text-amber-400">
-          {meta.label}
+
+        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-primary/80 group-hover/item:text-primary transition-colors">
+          <Edit3 className="size-3" />
+          <span>Details & Edit</span>
         </span>
       </div>
     </div>
@@ -126,17 +170,49 @@ function DeadlineCardItem({ item }: DeadlineCardItemProps) {
 }
 
 export function DeadlinesCard() {
-  const { deadlines: liveDeadlines } = useDeadlines();
+  const { deadlines: liveDeadlines, updateDeadline } = useDeadlines();
+  const [selectedDeadline, setSelectedDeadline] = useState<DeadlineRecord | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const deadlines: DeadlineItem[] =
-    liveDeadlines && liveDeadlines.length > 0
-      ? liveDeadlines.map((d) => ({
-          subjectCode: d.courses?.course_code ?? "MCA",
-          subjectName: d.courses?.course_name ?? "Anna University CEG",
-          title: d.title,
-          deadline: d.due_date,
-        }))
-      : deadlinesData.upcoming || deadlinesData.urgent || [];
+  // Fallback data when Supabase has not yet loaded or is empty
+  const fallbackDeadlines: DeadlineRecord[] = useMemo(() => {
+    return (deadlinesData.upcoming || deadlinesData.urgent || []).map(
+      (item, idx) => ({
+        id: `fallback-${idx}`,
+        batch_id: "",
+        course_id: "",
+        title: item.title,
+        description: null,
+        due_date: item.deadline,
+        created_at: new Date().toISOString(),
+        courses: {
+          id: `course-${idx}`,
+          course_code: item.subjectCode,
+          course_name: item.subjectName,
+        },
+      })
+    );
+  }, []);
+
+  // Filter out past due ones — only show upcoming deadlines and those due today
+  const deadlines: DeadlineRecord[] = useMemo(() => {
+    const raw =
+      liveDeadlines && liveDeadlines.length > 0 ? liveDeadlines : fallbackDeadlines;
+    return raw.filter((item) => {
+      const meta = getDeadlineMeta(item.due_date);
+      return !meta.isPastDue;
+    });
+  }, [liveDeadlines, fallbackDeadlines]);
+
+  const handleCardClick = (item: DeadlineRecord) => {
+    setSelectedDeadline(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedDeadline(null);
+  };
 
   return (
     <div className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-7 md:p-9 shadow-xs transition-all duration-500">
@@ -181,8 +257,9 @@ export function DeadlinesCard() {
           <div className="mt-5 sm:mt-7 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {deadlines.map((item, idx) => (
               <DeadlineCardItem
-                key={`${item.subjectCode}-${item.title}-${idx}`}
+                key={item.id || `${item.courses?.course_code}-${item.title}-${idx}`}
                 item={item}
+                onClick={() => handleCardClick(item)}
               />
             ))}
           </div>
@@ -200,6 +277,14 @@ export function DeadlinesCard() {
           </div>
         )}
       </div>
+
+      {/* Detail & Edit Modal */}
+      <AssignmentModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        assignment={selectedDeadline}
+        onSave={updateDeadline}
+      />
     </div>
   );
 }

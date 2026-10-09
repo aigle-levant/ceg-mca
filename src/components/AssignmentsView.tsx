@@ -12,10 +12,12 @@ import {
   Sparkles,
   RefreshCw,
   AlertCircle,
+  Edit3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDeadlines } from "@/hooks/useDeadlines";
 import type { DeadlineRecord } from "@/types/deadlines";
+import { AssignmentModal } from "@/components/AssignmentModal";
 
 function getDeadlineMeta(dateStr: string) {
   try {
@@ -62,7 +64,9 @@ function getDeadlineMeta(dateStr: string) {
 const STORAGE_KEY = "ceg-completed-deadlines-v2";
 
 export function AssignmentsView() {
-  const { deadlines, loading, error, refresh } = useDeadlines();
+  const { deadlines, loading, error, refresh, updateDeadline } = useDeadlines();
+  const [selectedDeadline, setSelectedDeadline] = useState<DeadlineRecord | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [completedMap, setCompletedMap] = useState<Record<string, boolean>>(() => {
     try {
@@ -76,6 +80,7 @@ export function AssignmentsView() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterTab, setFilterTab] = useState<"all" | "pending" | "completed" | "labs" | "theory">("all");
   const [batchFilter, setBatchFilter] = useState<"ALL" | "REGULAR" | "SS">("ALL");
+  const [hidePastDue, setHidePastDue] = useState(true);
 
   const toggleComplete = (id: string) => {
     setCompletedMap((prev) => {
@@ -103,12 +108,14 @@ export function AssignmentsView() {
         item.courses?.course_code?.startsWith("BX");
 
       const meta = getDeadlineMeta(item.due_date);
+      const isPastDue = meta.diffDays < 0;
 
       return {
         ...item,
         isCompleted,
         isLab,
         isBridge,
+        isPastDue,
         meta,
       };
     });
@@ -149,6 +156,9 @@ export function AssignmentsView() {
         (item.courses?.course_name && item.courses.course_name.toLowerCase().includes(q));
 
       if (!matchesSearch) return false;
+
+      // Hide past due items if enabled
+      if (hidePastDue && item.isPastDue) return false;
 
       // Status / Category filter
       if (filterTab === "pending") return !item.isCompleted;
@@ -307,6 +317,25 @@ export function AssignmentsView() {
               {tab.label}
             </button>
           ))}
+
+          {/* Toggle to hide/show past due */}
+          <button
+            type="button"
+            onClick={() => setHidePastDue((prev) => !prev)}
+            className={cn(
+              "px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200 border ml-1",
+              hidePastDue
+                ? "bg-card/80 text-muted-foreground hover:text-foreground border-border/70"
+                : "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
+            )}
+            title={
+              hidePastDue
+                ? "Click to show past due assignments"
+                : "Click to hide past due assignments"
+            }
+          >
+            {hidePastDue ? "Past Due: Hidden" : "Past Due: Shown"}
+          </button>
         </div>
       </div>
 
@@ -376,11 +405,24 @@ export function AssignmentsView() {
             return (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  setSelectedDeadline(item);
+                  setIsModalOpen(true);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedDeadline(item);
+                    setIsModalOpen(true);
+                  }
+                }}
                 className={cn(
-                  "group relative flex flex-col justify-between rounded-2xl border bg-card p-5 shadow-xs transition-all duration-300 hover:shadow-md",
+                  "group relative flex flex-col justify-between rounded-2xl border bg-card p-5 shadow-xs transition-all duration-300 hover:shadow-md cursor-pointer text-left select-none",
                   item.isCompleted
                     ? "border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-950/10 opacity-80"
-                    : "border-border/80 hover:border-primary/40"
+                    : "border-border/80 hover:border-primary/50"
                 )}
               >
                 <div>
@@ -440,7 +482,7 @@ export function AssignmentsView() {
                   {/* Title */}
                   <h3
                     className={cn(
-                      "text-base sm:text-lg font-bold tracking-tight text-foreground transition-all",
+                      "text-base sm:text-lg font-bold tracking-tight text-foreground transition-all group-hover:text-primary",
                       item.isCompleted && "line-through text-muted-foreground"
                     )}
                   >
@@ -454,47 +496,77 @@ export function AssignmentsView() {
 
                   {/* Optional Description */}
                   {item.description && (
-                    <p className="mt-2.5 text-xs text-muted-foreground/90 bg-muted/40 p-2.5 rounded-xl border border-border/50">
+                    <p className="mt-2.5 text-xs text-muted-foreground/90 bg-muted/40 p-2.5 rounded-xl border border-border/50 line-clamp-2">
                       {item.description}
                     </p>
                   )}
                 </div>
 
-                {/* Footer with due date & complete toggle button */}
+                {/* Footer with due date & actions */}
                 <div className="mt-5 pt-3.5 border-t border-border/50 flex items-center justify-between gap-2">
                   <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-mono">
                     <Calendar className="size-3.5" />
                     <span>{item.meta.badge}</span>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => toggleComplete(item.id)}
-                    className={cn(
-                      "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all active:scale-95 touch-manipulation",
-                      item.isCompleted
-                        ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/30"
-                        : "bg-muted hover:bg-primary hover:text-primary-foreground text-foreground border border-border/60"
-                    )}
-                  >
-                    {item.isCompleted ? (
-                      <>
-                        <CircleCheck className="size-3.5" />
-                        Completed
-                      </>
-                    ) : (
-                      <>
-                        <Circle className="size-3.5 text-muted-foreground" />
-                        Mark Done
-                      </>
-                    )}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedDeadline(item);
+                        setIsModalOpen(true);
+                      }}
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted border border-border/60 transition-all active:scale-95 touch-manipulation"
+                      title="View details & edit description"
+                    >
+                      <Edit3 className="size-3 text-primary" />
+                      <span>Details</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleComplete(item.id);
+                      }}
+                      className={cn(
+                        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all active:scale-95 touch-manipulation",
+                        item.isCompleted
+                          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/30"
+                          : "bg-muted hover:bg-primary hover:text-primary-foreground text-foreground border border-border/60"
+                      )}
+                    >
+                      {item.isCompleted ? (
+                        <>
+                          <CircleCheck className="size-3.5" />
+                          Completed
+                        </>
+                      ) : (
+                        <>
+                          <Circle className="size-3.5 text-muted-foreground" />
+                          Mark Done
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
       )}
+
+      {/* Detail & Edit Modal */}
+      <AssignmentModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedDeadline(null);
+        }}
+        assignment={selectedDeadline}
+        onSave={updateDeadline}
+      />
 
       {/* Helpful guidance alert */}
       <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 sm:p-5 flex items-start gap-3">

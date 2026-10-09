@@ -79,5 +79,37 @@ export function useDeadlines() {
     };
   }, []);
 
-  return { deadlines, loading, error, refresh: fetchDeadlines };
+  const updateDeadline = useCallback(
+    async (
+      id: string,
+      updates: { title: string; description: string | null }
+    ) => {
+      const { error: updateError } = await supabase
+        .from("deadlines")
+        .update({
+          title: updates.title,
+          description: updates.description,
+        })
+        .eq("id", id);
+
+      if (updateError) {
+        throw new Error(updateError.message);
+      }
+
+      setDeadlines((prev) =>
+        prev.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                title: updates.title,
+                description: updates.description,
+              }
+            : item
+        )
+      );
+    },
+    []
+  );
+
+  return { deadlines, loading, error, refresh: fetchDeadlines, updateDeadline };
 }
