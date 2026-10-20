@@ -5,9 +5,13 @@ import {
   AlertTriangle,
   CheckCircle2,
   Timer,
+  BookOpen,
+  ServerCrash,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import examDatesData from "@/data/exam-dates.json";
+import { useExams } from "@/hooks/useExams";
+import type { ExamRecord } from "@/types/exams";
 
 // ─── Date helpers ───────────────────────────────────────────────────
 
@@ -100,10 +104,20 @@ function StatusBadge({ status }: { status: DateStatus }) {
   );
 }
 
+function TentativeBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-dashed border-orange-400/60 bg-orange-400/10 px-2 py-0.5 text-[10px] font-semibold text-orange-600 dark:text-orange-400">
+      <span className="size-1.5 rounded-full bg-orange-400 opacity-70" />
+      Tentative
+    </span>
+  );
+}
+
 // ─── Component ──────────────────────────────────────────────────────
 
 export function ExamDates() {
   const now = new Date();
+  const { exams, loading: examsLoading, error: examsError } = useExams();
 
   const ca1 = examDatesData.CA_1;
   const ca2 = examDatesData.CA_2;
@@ -121,6 +135,14 @@ export function ExamDates() {
 
   return (
     <div className="space-y-5">
+      {/* ── Current Exams (from Supabase) ───────────────────────── */}
+      <CurrentExamsSection
+        exams={exams}
+        loading={examsLoading}
+        error={examsError}
+        now={now}
+      />
+
       {/* CA 1 */}
       <ExamCard
         title="CA 1 — Continuous Assessment"
@@ -203,6 +225,148 @@ export function ExamDates() {
             </span>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Current Exams section ──────────────────────────────────────────
+
+function CurrentExamsSection({
+  exams,
+  loading,
+  error,
+  now,
+}: {
+  exams: ExamRecord[];
+  loading: boolean;
+  error: string | null;
+  now: Date;
+}) {
+  // Sort: upcoming/today first, then past
+  const sorted = [...exams].sort((a, b) => {
+    const da = a.exam_date ? new Date(a.exam_date).getTime() : Infinity;
+    const db = b.exam_date ? new Date(b.exam_date).getTime() : Infinity;
+    return da - db;
+  });
+
+  return (
+    <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-border/80 bg-card shadow-xs">
+      {/* Header */}
+      <div className="flex items-center gap-3 border-b border-border/60 px-4 sm:px-6 py-3.5 sm:py-4">
+        <div className="flex size-8 sm:size-9 items-center justify-center rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-500 dark:text-violet-400">
+          <BookOpen className="size-4" />
+        </div>
+        <div>
+          <h3 className="text-sm sm:text-base font-semibold tracking-tight">Current Exams</h3>
+          <p className="text-[11px] sm:text-xs text-muted-foreground">Individual course exam dates</p>
+        </div>
+        {!loading && !error && exams.length > 0 && (
+          <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-[11px] font-semibold text-muted-foreground border border-border/50">
+            {exams.length} exam{exams.length !== 1 ? "s" : ""}
+          </span>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="px-4 sm:px-6 py-4 sm:py-5">
+        {loading && (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/50 p-3.5 animate-pulse">
+                <div className="size-8 rounded-lg bg-muted" />
+                <div className="flex-1 space-y-1.5">
+                  <div className="h-3.5 w-2/5 rounded bg-muted" />
+                  <div className="h-3 w-1/4 rounded bg-muted" />
+                </div>
+                <div className="h-5 w-16 rounded-full bg-muted" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="flex flex-col items-center gap-2 py-6 text-center text-sm text-destructive">
+            <ServerCrash className="size-7 text-destructive/60" />
+            <span>Failed to load exams</span>
+            <span className="text-xs text-muted-foreground">{error}</span>
+          </div>
+        )}
+
+        {!loading && !error && exams.length === 0 && (
+          <div className="flex flex-col items-center gap-2 py-8 text-center">
+            <CalendarCheck className="size-8 text-muted-foreground/40" />
+            <p className="text-sm font-medium text-muted-foreground">No exam dates scheduled yet</p>
+            <p className="text-xs text-muted-foreground/70">Check back later for individual course exam dates</p>
+          </div>
+        )}
+
+        {!loading && !error && sorted.length > 0 && (
+          <div className="space-y-2.5">
+            {sorted.map((exam) => {
+              const date = exam.exam_date ? new Date(exam.exam_date) : null;
+              const status = date ? getSingleDateStatus(date, now) : ("upcoming" as DateStatus);
+              const countdown = date ? getSingleCountdownText(date, now) : "Date TBD";
+              const formattedDate = date
+                ? date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+                : "Date TBD";
+              const dayOfWeek = date
+                ? date.toLocaleDateString("en-IN", { weekday: "short" })
+                : null;
+
+              const isTentative = exam.is_tentative === true;
+
+              return (
+                <div
+                  key={exam.id}
+                  className={cn(
+                    "flex flex-col gap-3 rounded-xl border p-3.5 sm:flex-row sm:items-center sm:justify-between transition-opacity",
+                    status === "past"
+                      ? "border-border/50 opacity-50"
+                      : isTentative
+                      ? "border-orange-400/40 border-dashed bg-background/50"
+                      : "border-border/80 bg-background/50"
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={cn(
+                        "flex size-9 shrink-0 items-center justify-center rounded-lg border text-xs font-bold",
+                        status === "active"
+                          ? "bg-violet-500/15 border-violet-500/30 text-violet-600 dark:text-violet-300"
+                          : status === "upcoming"
+                          ? "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
+                          : "bg-muted border-border/50 text-muted-foreground"
+                      )}
+                    >
+                      {date ? date.getDate() : "?"}
+                    </div>
+                    <div>
+                      <p className="flex items-center gap-2 text-sm font-semibold leading-snug">
+                        {exam.courses?.course_name || exam.course_code}
+                        {isTentative && <TentativeBadge />}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {exam.course_code}
+                        {exam.courses?.category ? ` · ${exam.courses.category}` : ""}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 sm:flex-col sm:items-end sm:justify-start sm:gap-1">
+                    <StatusBadge status={status} />
+                    <div className="text-right">
+                      <p className="text-xs font-medium text-foreground">
+                        {formattedDate}{dayOfWeek ? `, ${dayOfWeek}` : ""}
+                      </p>
+                      <p className="text-[11px] text-muted-foreground">{countdown}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
